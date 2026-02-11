@@ -1,0 +1,219 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Believe\TeamMembers\TeamMemberCreateParams\Member;
+
+use Believe\Core\Attributes\Optional;
+use Believe\Core\Attributes\Required;
+use Believe\Core\Concerns\SdkModel;
+use Believe\Core\Contracts\BaseModel;
+use Believe\TeamMembers\MedicalSpecialty;
+use Believe\TeamMembers\TeamMemberCreateParams\Member\MedicalStaffBase\MemberType;
+
+/**
+ * Medical and wellness staff member.
+ *
+ * @phpstan-type MedicalStaffBaseShape = array{
+ *   characterID: string,
+ *   specialty: MedicalSpecialty|value-of<MedicalSpecialty>,
+ *   teamID: string,
+ *   yearsWithTeam: int,
+ *   licenseNumber?: string|null,
+ *   memberType?: null|MemberType|value-of<MemberType>,
+ *   qualifications?: list<string>|null,
+ * }
+ */
+final class MedicalStaffBase implements BaseModel
+{
+    /** @use SdkModel<MedicalStaffBaseShape> */
+    use SdkModel;
+
+    /**
+     * ID of the character (references /characters/{id}).
+     */
+    #[Required('character_id')]
+    public string $characterID;
+
+    /**
+     * Medical specialty.
+     *
+     * @var value-of<MedicalSpecialty> $specialty
+     */
+    #[Required(enum: MedicalSpecialty::class)]
+    public string $specialty;
+
+    /**
+     * ID of the team they belong to.
+     */
+    #[Required('team_id')]
+    public string $teamID;
+
+    /**
+     * Number of years with the current team.
+     */
+    #[Required('years_with_team')]
+    public int $yearsWithTeam;
+
+    /**
+     * Professional license number.
+     */
+    #[Optional('license_number', nullable: true)]
+    public ?string $licenseNumber;
+
+    /**
+     * Discriminator field indicating this is medical staff.
+     *
+     * @var value-of<MemberType>|null $memberType
+     */
+    #[Optional('member_type', enum: MemberType::class)]
+    public ?string $memberType;
+
+    /**
+     * Medical qualifications and degrees.
+     *
+     * @var list<string>|null $qualifications
+     */
+    #[Optional(list: 'string')]
+    public ?array $qualifications;
+
+    /**
+     * `new MedicalStaffBase()` is missing required properties by the API.
+     *
+     * To enforce required parameters use
+     * ```
+     * MedicalStaffBase::with(
+     *   characterID: ..., specialty: ..., teamID: ..., yearsWithTeam: ...
+     * )
+     * ```
+     *
+     * Otherwise ensure the following setters are called
+     *
+     * ```
+     * (new MedicalStaffBase)
+     *   ->withCharacterID(...)
+     *   ->withSpecialty(...)
+     *   ->withTeamID(...)
+     *   ->withYearsWithTeam(...)
+     * ```
+     */
+    public function __construct()
+    {
+        $this->initialize();
+    }
+
+    /**
+     * Construct an instance from the required parameters.
+     *
+     * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param MedicalSpecialty|value-of<MedicalSpecialty> $specialty
+     * @param MemberType|value-of<MemberType>|null $memberType
+     * @param list<string>|null $qualifications
+     */
+    public static function with(
+        string $characterID,
+        MedicalSpecialty|string $specialty,
+        string $teamID,
+        int $yearsWithTeam,
+        ?string $licenseNumber = null,
+        MemberType|string|null $memberType = null,
+        ?array $qualifications = null,
+    ): self {
+        $self = new self;
+
+        $self['characterID'] = $characterID;
+        $self['specialty'] = $specialty;
+        $self['teamID'] = $teamID;
+        $self['yearsWithTeam'] = $yearsWithTeam;
+
+        null !== $licenseNumber && $self['licenseNumber'] = $licenseNumber;
+        null !== $memberType && $self['memberType'] = $memberType;
+        null !== $qualifications && $self['qualifications'] = $qualifications;
+
+        return $self;
+    }
+
+    /**
+     * ID of the character (references /characters/{id}).
+     */
+    public function withCharacterID(string $characterID): self
+    {
+        $self = clone $this;
+        $self['characterID'] = $characterID;
+
+        return $self;
+    }
+
+    /**
+     * Medical specialty.
+     *
+     * @param MedicalSpecialty|value-of<MedicalSpecialty> $specialty
+     */
+    public function withSpecialty(MedicalSpecialty|string $specialty): self
+    {
+        $self = clone $this;
+        $self['specialty'] = $specialty;
+
+        return $self;
+    }
+
+    /**
+     * ID of the team they belong to.
+     */
+    public function withTeamID(string $teamID): self
+    {
+        $self = clone $this;
+        $self['teamID'] = $teamID;
+
+        return $self;
+    }
+
+    /**
+     * Number of years with the current team.
+     */
+    public function withYearsWithTeam(int $yearsWithTeam): self
+    {
+        $self = clone $this;
+        $self['yearsWithTeam'] = $yearsWithTeam;
+
+        return $self;
+    }
+
+    /**
+     * Professional license number.
+     */
+    public function withLicenseNumber(?string $licenseNumber): self
+    {
+        $self = clone $this;
+        $self['licenseNumber'] = $licenseNumber;
+
+        return $self;
+    }
+
+    /**
+     * Discriminator field indicating this is medical staff.
+     *
+     * @param MemberType|value-of<MemberType> $memberType
+     */
+    public function withMemberType(MemberType|string $memberType): self
+    {
+        $self = clone $this;
+        $self['memberType'] = $memberType;
+
+        return $self;
+    }
+
+    /**
+     * Medical qualifications and degrees.
+     *
+     * @param list<string> $qualifications
+     */
+    public function withQualifications(array $qualifications): self
+    {
+        $self = clone $this;
+        $self['qualifications'] = $qualifications;
+
+        return $self;
+    }
+}
