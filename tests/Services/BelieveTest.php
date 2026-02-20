@@ -32,7 +32,7 @@ final class BelieveTest extends TestCase
     public function testSubmit(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->believe->submit(
@@ -48,7 +48,7 @@ final class BelieveTest extends TestCase
     public function testSubmitWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->believe->submit(
