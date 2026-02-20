@@ -31,7 +31,7 @@ final class CommentaryTest extends TestCase
     public function testStream(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->matches->commentary->stream('match_id');

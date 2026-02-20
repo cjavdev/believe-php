@@ -32,7 +32,7 @@ final class ReframeTest extends TestCase
     public function testTransformNegativeThoughts(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->reframe->transformNegativeThoughts(
@@ -50,7 +50,7 @@ final class ReframeTest extends TestCase
     public function testTransformNegativeThoughtsWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->reframe->transformNegativeThoughts(
