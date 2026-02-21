@@ -142,22 +142,4 @@ interface EpisodesContract
         string $episodeID,
         RequestOptions|array|null $requestOptions = null
     ): array;
-
-    /**
-     * @api
-     *
-     * @param int $limit Maximum number of items to return (max: 100)
-     * @param int $skip Number of items to skip (offset)
-     * @param RequestOpts|null $requestOptions
-     *
-     * @return SkipLimitPage<Episode>
-     *
-     * @throws APIException
-     */
-    public function listBySeason(
-        int $seasonNumber,
-        int $limit = 20,
-        int $skip = 0,
-        RequestOptions|array|null $requestOptions = null,
-    ): SkipLimitPage;
 }
