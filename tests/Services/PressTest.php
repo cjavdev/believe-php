@@ -32,7 +32,7 @@ final class PressTest extends TestCase
     public function testSimulate(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->press->simulate(
@@ -47,7 +47,7 @@ final class PressTest extends TestCase
     public function testSimulateWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->press->simulate(

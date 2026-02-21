@@ -35,7 +35,7 @@ final class MatchesTest extends TestCase
     public function testCreate(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->matches->create(
@@ -53,7 +53,7 @@ final class MatchesTest extends TestCase
     public function testCreateWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->matches->create(
@@ -89,7 +89,7 @@ final class MatchesTest extends TestCase
     public function testRetrieve(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->matches->retrieve('match_id');
@@ -102,7 +102,7 @@ final class MatchesTest extends TestCase
     public function testUpdate(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->matches->update('match_id');
@@ -115,7 +115,7 @@ final class MatchesTest extends TestCase
     public function testList(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $page = $this->client->matches->list();
@@ -133,7 +133,7 @@ final class MatchesTest extends TestCase
     public function testDelete(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->matches->delete('match_id');
@@ -146,7 +146,7 @@ final class MatchesTest extends TestCase
     public function testGetLesson(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->matches->getLesson('match_id');
@@ -159,7 +159,7 @@ final class MatchesTest extends TestCase
     public function testGetTurningPoints(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->matches->getTurningPoints('match_id');
@@ -172,7 +172,7 @@ final class MatchesTest extends TestCase
     public function testStreamLive(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism doesn\'t support callbacks yet');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->matches->streamLive();

@@ -32,7 +32,7 @@ final class ConflictsTest extends TestCase
     public function testResolve(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->conflicts->resolve(
@@ -49,7 +49,7 @@ final class ConflictsTest extends TestCase
     public function testResolveWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->conflicts->resolve(
