@@ -11,7 +11,6 @@ use Believe\Core\Exceptions\APIException;
 use Believe\Core\Util;
 use Believe\Episodes\Episode;
 use Believe\Episodes\EpisodeCreateParams;
-use Believe\Episodes\EpisodeListBySeasonParams;
 use Believe\Episodes\EpisodeListParams;
 use Believe\Episodes\EpisodeUpdateParams;
 use Believe\RequestOptions;
@@ -230,39 +229,6 @@ final class EpisodesRawService implements EpisodesRawContract
             path: ['episodes/%1$s/wisdom', $episodeID],
             options: $requestOptions,
             convert: new MapOf('mixed'),
-        );
-    }
-
-    /**
-     * @api
-     *
-     * Get a paginated list of episodes from a specific season.
-     *
-     * @param array{limit?: int, skip?: int}|EpisodeListBySeasonParams $params
-     * @param RequestOpts|null $requestOptions
-     *
-     * @return BaseResponse<SkipLimitPage<Episode>>
-     *
-     * @throws APIException
-     */
-    public function listBySeason(
-        int $seasonNumber,
-        array|EpisodeListBySeasonParams $params,
-        RequestOptions|array|null $requestOptions = null,
-    ): BaseResponse {
-        [$parsed, $options] = EpisodeListBySeasonParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
-
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
-            method: 'get',
-            path: ['episodes/seasons/%1$s', $seasonNumber],
-            query: $parsed,
-            options: $options,
-            convert: Episode::class,
-            page: SkipLimitPage::class,
         );
     }
 }

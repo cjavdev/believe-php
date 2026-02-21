@@ -156,22 +156,4 @@ final class EpisodesTest extends TestCase
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertIsArray($result);
     }
-
-    #[Test]
-    public function testListBySeason(): void
-    {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Mock server tests are disabled');
-        }
-
-        $page = $this->client->episodes->listBySeason(0);
-
-        // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(SkipLimitPage::class, $page);
-
-        if ($item = $page->getItems()[0] ?? null) {
-            // @phpstan-ignore-next-line method.alreadyNarrowedType
-            $this->assertInstanceOf(Episode::class, $item);
-        }
-    }
 }
