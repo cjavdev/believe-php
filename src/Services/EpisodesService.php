@@ -249,31 +249,4 @@ final class EpisodesService implements EpisodesContract
 
         return $response->parse();
     }
-
-    /**
-     * @api
-     *
-     * Get a paginated list of episodes from a specific season.
-     *
-     * @param int $limit Maximum number of items to return (max: 100)
-     * @param int $skip Number of items to skip (offset)
-     * @param RequestOpts|null $requestOptions
-     *
-     * @return SkipLimitPage<Episode>
-     *
-     * @throws APIException
-     */
-    public function listBySeason(
-        int $seasonNumber,
-        int $limit = 20,
-        int $skip = 0,
-        RequestOptions|array|null $requestOptions = null,
-    ): SkipLimitPage {
-        $params = Util::removeNulls(['limit' => $limit, 'skip' => $skip]);
-
-        // @phpstan-ignore-next-line argument.type
-        $response = $this->raw->listBySeason($seasonNumber, params: $params, requestOptions: $requestOptions);
-
-        return $response->parse();
-    }
 }

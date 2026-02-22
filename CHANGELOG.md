@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.2.0 (2026-02-21)
+
+Full Changelog: [v0.1.0...v0.2.0](https://github.com/cjavdev/believe-php/compare/v0.1.0...v0.2.0)
+
+### Features
+
+* **api:** manual updates ([3199e71](https://github.com/cjavdev/believe-php/commit/3199e7147f554ee807342a6be4bec29ef98d5858))
+* **api:** manual updates ([da4458e](https://github.com/cjavdev/believe-php/commit/da4458e59eb1a2cd79908908b7a668294e188b54))
+
 ## 0.1.0 (2026-02-20)
 
 Full Changelog: [v0.0.1...v0.1.0](https://github.com/cjavdev/believe-php/compare/v0.0.1...v0.1.0)
