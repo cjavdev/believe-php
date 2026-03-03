@@ -15,6 +15,8 @@ use Believe\Teams\Logo\LogoDownloadParams;
 use Believe\Teams\Logo\LogoUploadParams;
 
 /**
+ * Operations related to football teams.
+ *
  * @phpstan-import-type RequestOpts from \Believe\RequestOptions
  */
 final class LogoRawService implements LogoRawContract

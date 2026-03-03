@@ -13,6 +13,8 @@ use Believe\ServiceContracts\Coaching\PrinciplesContract;
 use Believe\SkipLimitPage;
 
 /**
+ * Interactive endpoints for motivation and guidance.
+ *
  * @phpstan-import-type RequestOpts from \Believe\RequestOptions
  */
 final class PrinciplesService implements PrinciplesContract

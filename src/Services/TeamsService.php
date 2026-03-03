@@ -18,6 +18,8 @@ use Believe\Teams\Team;
 use Believe\Teams\TeamValues;
 
 /**
+ * Operations related to football teams.
+ *
  * @phpstan-import-type AnnualBudgetGbpShape from \Believe\Teams\TeamCreateParams\AnnualBudgetGbp
  * @phpstan-import-type AnnualBudgetGbpShape from \Believe\Teams\TeamUpdateParams\AnnualBudgetGbp as AnnualBudgetGbpShape1
  * @phpstan-import-type TeamValuesShape from \Believe\Teams\TeamValues

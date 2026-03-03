@@ -16,6 +16,8 @@ use Believe\ServiceContracts\CharactersContract;
 use Believe\SkipLimitPage;
 
 /**
+ * Operations related to Ted Lasso characters.
+ *
  * @phpstan-import-type SalaryGbpShape from \Believe\Characters\CharacterCreateParams\SalaryGbp
  * @phpstan-import-type SalaryGbpShape from \Believe\Characters\CharacterUpdateParams\SalaryGbp as SalaryGbpShape1
  * @phpstan-import-type EmotionalStatsShape from \Believe\Characters\EmotionalStats

@@ -10,6 +10,8 @@ use Believe\RequestOptions;
 use Believe\ServiceContracts\Client\WsContract;
 
 /**
+ * WebSocket endpoints for real-time bidirectional communication - Live match simulation.
+ *
  * @phpstan-import-type RequestOpts from \Believe\RequestOptions
  */
 final class WsService implements WsContract

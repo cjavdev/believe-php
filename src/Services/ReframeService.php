@@ -12,6 +12,8 @@ use Believe\RequestOptions;
 use Believe\ServiceContracts\ReframeContract;
 
 /**
+ * Interactive endpoints for motivation and guidance.
+ *
  * @phpstan-import-type RequestOpts from \Believe\RequestOptions
  */
 final class ReframeService implements ReframeContract
