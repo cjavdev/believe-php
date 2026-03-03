@@ -11,6 +11,8 @@ use Believe\RequestOptions;
 use Believe\ServiceContracts\Matches\CommentaryRawContract;
 
 /**
+ * Server-Sent Events (SSE) streaming endpoints.
+ *
  * @phpstan-import-type RequestOpts from \Believe\RequestOptions
  */
 final class CommentaryRawService implements CommentaryRawContract

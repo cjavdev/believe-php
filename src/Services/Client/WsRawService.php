@@ -11,6 +11,8 @@ use Believe\RequestOptions;
 use Believe\ServiceContracts\Client\WsRawContract;
 
 /**
+ * WebSocket endpoints for real-time bidirectional communication - Live match simulation.
+ *
  * @phpstan-import-type RequestOpts from \Believe\RequestOptions
  */
 final class WsRawService implements WsRawContract

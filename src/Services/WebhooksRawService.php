@@ -19,6 +19,8 @@ use Believe\Webhooks\WebhookTriggerEventParams\EventType;
 use Believe\Webhooks\WebhookTriggerEventResponse;
 
 /**
+ * Register webhook endpoints and trigger events for testing.
+ *
  * @phpstan-import-type PayloadShape from \Believe\Webhooks\WebhookTriggerEventParams\Payload
  * @phpstan-import-type RequestOpts from \Believe\RequestOptions
  */

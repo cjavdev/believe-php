@@ -10,6 +10,8 @@ use Believe\RequestOptions;
 use Believe\ServiceContracts\StreamContract;
 
 /**
+ * Server-Sent Events (SSE) streaming endpoints.
+ *
  * @phpstan-import-type RequestOpts from \Believe\RequestOptions
  */
 final class StreamService implements StreamContract

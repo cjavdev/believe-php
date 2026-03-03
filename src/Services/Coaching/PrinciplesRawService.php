@@ -14,6 +14,8 @@ use Believe\ServiceContracts\Coaching\PrinciplesRawContract;
 use Believe\SkipLimitPage;
 
 /**
+ * Interactive endpoints for motivation and guidance.
+ *
  * @phpstan-import-type RequestOpts from \Believe\RequestOptions
  */
 final class PrinciplesRawService implements PrinciplesRawContract

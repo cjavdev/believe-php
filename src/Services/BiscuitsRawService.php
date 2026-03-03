@@ -14,6 +14,8 @@ use Believe\ServiceContracts\BiscuitsRawContract;
 use Believe\SkipLimitPage;
 
 /**
+ * Interactive endpoints for motivation and guidance.
+ *
  * @phpstan-import-type RequestOpts from \Believe\RequestOptions
  */
 final class BiscuitsRawService implements BiscuitsRawContract

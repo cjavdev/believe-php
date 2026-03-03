@@ -12,6 +12,8 @@ use Believe\ServiceContracts\Teams\LogoContract;
 use Believe\Teams\Logo\FileUpload;
 
 /**
+ * Operations related to football teams.
+ *
  * @phpstan-import-type RequestOpts from \Believe\RequestOptions
  */
 final class LogoService implements LogoContract

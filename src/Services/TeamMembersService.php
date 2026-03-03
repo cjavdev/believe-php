@@ -27,6 +27,8 @@ use Believe\TeamMembers\TeamMemberUpdateParams\Updates\MedicalStaffUpdate;
 use Believe\TeamMembers\TeamMemberUpdateParams\Updates\PlayerUpdate;
 
 /**
+ * Team members with union types (oneOf) - Players, Coaches, Medical Staff, Equipment Managers.
+ *
  * @phpstan-import-type MemberShape from \Believe\TeamMembers\TeamMemberCreateParams\Member
  * @phpstan-import-type UpdatesShape from \Believe\TeamMembers\TeamMemberUpdateParams\Updates
  * @phpstan-import-type RequestOpts from \Believe\RequestOptions

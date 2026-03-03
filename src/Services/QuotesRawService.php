@@ -22,6 +22,8 @@ use Believe\ServiceContracts\QuotesRawContract;
 use Believe\SkipLimitPage;
 
 /**
+ * Memorable quotes from the show.
+ *
  * @phpstan-import-type RequestOpts from \Believe\RequestOptions
  */
 final class QuotesRawService implements QuotesRawContract
