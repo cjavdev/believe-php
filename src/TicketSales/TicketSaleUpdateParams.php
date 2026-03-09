@@ -2,9 +2,8 @@
 
 declare(strict_types=1);
 
-namespace Believe\Client\TicketSales;
+namespace Believe\TicketSales;
 
-use Believe\Client\TicketSales\TicketSaleUpdateParams\PurchaseMethod;
 use Believe\Core\Attributes\Optional;
 use Believe\Core\Concerns\SdkModel;
 use Believe\Core\Concerns\SdkParams;
@@ -13,7 +12,7 @@ use Believe\Core\Contracts\BaseModel;
 /**
  * Update specific fields of an existing ticket sale.
  *
- * @see Believe\Services\Client\TicketSalesService::update()
+ * @see Believe\Services\TicketSalesService::update()
  *
  * @phpstan-type TicketSaleUpdateParamsShape = array{
  *   buyerEmail?: string|null,

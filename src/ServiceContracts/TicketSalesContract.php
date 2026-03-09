@@ -2,16 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Believe\ServiceContracts\Client;
+namespace Believe\ServiceContracts;
 
-use Believe\Client\TicketSales\TicketSaleCreateParams\PurchaseMethod;
-use Believe\Client\TicketSales\TicketSaleGetResponse;
-use Believe\Client\TicketSales\TicketSaleListResponse;
-use Believe\Client\TicketSales\TicketSaleNewResponse;
-use Believe\Client\TicketSales\TicketSaleUpdateResponse;
 use Believe\Core\Exceptions\APIException;
 use Believe\RequestOptions;
 use Believe\SkipLimitPage;
+use Believe\TicketSales\PurchaseMethod;
+use Believe\TicketSales\TicketSale;
 
 /**
  * @phpstan-import-type RequestOpts from \Believe\RequestOptions
@@ -51,7 +48,7 @@ interface TicketSalesContract
         ?string $buyerEmail = null,
         ?string $couponCode = null,
         RequestOptions|array|null $requestOptions = null,
-    ): TicketSaleNewResponse;
+    ): TicketSale;
 
     /**
      * @api
@@ -63,12 +60,12 @@ interface TicketSalesContract
     public function retrieve(
         string $ticketSaleID,
         RequestOptions|array|null $requestOptions = null
-    ): TicketSaleGetResponse;
+    ): TicketSale;
 
     /**
      * @api
      *
-     * @param \Believe\Client\TicketSales\TicketSaleUpdateParams\PurchaseMethod|value-of<\Believe\Client\TicketSales\TicketSaleUpdateParams\PurchaseMethod>|null $purchaseMethod how the ticket was purchased
+     * @param PurchaseMethod|value-of<PurchaseMethod>|null $purchaseMethod how the ticket was purchased
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -81,14 +78,14 @@ interface TicketSalesContract
         ?string $currency = null,
         ?string $discount = null,
         ?string $matchID = null,
-        \Believe\Client\TicketSales\TicketSaleUpdateParams\PurchaseMethod|string|null $purchaseMethod = null,
+        PurchaseMethod|string|null $purchaseMethod = null,
         ?int $quantity = null,
         ?string $subtotal = null,
         ?string $tax = null,
         ?string $total = null,
         ?string $unitPrice = null,
         RequestOptions|array|null $requestOptions = null,
-    ): TicketSaleUpdateResponse;
+    ): TicketSale;
 
     /**
      * @api
@@ -97,11 +94,11 @@ interface TicketSalesContract
      * @param string|null $currency Filter by currency (GBP, USD, EUR)
      * @param int $limit Maximum number of items to return (max: 100)
      * @param string|null $matchID Filter by match ID
-     * @param \Believe\Client\TicketSales\TicketSaleListParams\PurchaseMethod|value-of<\Believe\Client\TicketSales\TicketSaleListParams\PurchaseMethod>|null $purchaseMethod Filter by purchase method
+     * @param PurchaseMethod|value-of<PurchaseMethod>|null $purchaseMethod Filter by purchase method
      * @param int $skip Number of items to skip (offset)
      * @param RequestOpts|null $requestOptions
      *
-     * @return SkipLimitPage<TicketSaleListResponse>
+     * @return SkipLimitPage<TicketSale>
      *
      * @throws APIException
      */
@@ -110,7 +107,7 @@ interface TicketSalesContract
         ?string $currency = null,
         int $limit = 20,
         ?string $matchID = null,
-        \Believe\Client\TicketSales\TicketSaleListParams\PurchaseMethod|string|null $purchaseMethod = null,
+        PurchaseMethod|string|null $purchaseMethod = null,
         int $skip = 0,
         RequestOptions|array|null $requestOptions = null,
     ): SkipLimitPage;

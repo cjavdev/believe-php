@@ -1,14 +1,12 @@
 <?php
 
-namespace Tests\Services\Client;
+namespace Tests\Services;
 
 use Believe\Client;
-use Believe\Client\TicketSales\TicketSaleGetResponse;
-use Believe\Client\TicketSales\TicketSaleListResponse;
-use Believe\Client\TicketSales\TicketSaleNewResponse;
-use Believe\Client\TicketSales\TicketSaleUpdateResponse;
 use Believe\Core\Util;
 use Believe\SkipLimitPage;
+use Believe\TicketSales\PurchaseMethod;
+use Believe\TicketSales\TicketSale;
 use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
@@ -39,12 +37,12 @@ final class TicketSalesTest extends TestCase
             $this->markTestSkipped('Mock server tests are disabled');
         }
 
-        $result = $this->client->client->ticketSales->create(
+        $result = $this->client->ticketSales->create(
             buyerName: 'Mae Green',
             currency: 'GBP',
             discount: '9.00',
             matchID: 'match-001',
-            purchaseMethod: 'online',
+            purchaseMethod: PurchaseMethod::ONLINE,
             quantity: 2,
             subtotal: '90.00',
             tax: '16.20',
@@ -53,7 +51,7 @@ final class TicketSalesTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(TicketSaleNewResponse::class, $result);
+        $this->assertInstanceOf(TicketSale::class, $result);
     }
 
     #[Test]
@@ -63,12 +61,12 @@ final class TicketSalesTest extends TestCase
             $this->markTestSkipped('Mock server tests are disabled');
         }
 
-        $result = $this->client->client->ticketSales->create(
+        $result = $this->client->ticketSales->create(
             buyerName: 'Mae Green',
             currency: 'GBP',
             discount: '9.00',
             matchID: 'match-001',
-            purchaseMethod: 'online',
+            purchaseMethod: PurchaseMethod::ONLINE,
             quantity: 2,
             subtotal: '90.00',
             tax: '16.20',
@@ -79,7 +77,7 @@ final class TicketSalesTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(TicketSaleNewResponse::class, $result);
+        $this->assertInstanceOf(TicketSale::class, $result);
     }
 
     #[Test]
@@ -89,10 +87,10 @@ final class TicketSalesTest extends TestCase
             $this->markTestSkipped('Mock server tests are disabled');
         }
 
-        $result = $this->client->client->ticketSales->retrieve('ticket_sale_id');
+        $result = $this->client->ticketSales->retrieve('ticket_sale_id');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(TicketSaleGetResponse::class, $result);
+        $this->assertInstanceOf(TicketSale::class, $result);
     }
 
     #[Test]
@@ -102,10 +100,10 @@ final class TicketSalesTest extends TestCase
             $this->markTestSkipped('Mock server tests are disabled');
         }
 
-        $result = $this->client->client->ticketSales->update('ticket_sale_id');
+        $result = $this->client->ticketSales->update('ticket_sale_id');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(TicketSaleUpdateResponse::class, $result);
+        $this->assertInstanceOf(TicketSale::class, $result);
     }
 
     #[Test]
@@ -115,14 +113,14 @@ final class TicketSalesTest extends TestCase
             $this->markTestSkipped('Mock server tests are disabled');
         }
 
-        $page = $this->client->client->ticketSales->list();
+        $page = $this->client->ticketSales->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(SkipLimitPage::class, $page);
 
         if ($item = $page->getItems()[0] ?? null) {
             // @phpstan-ignore-next-line method.alreadyNarrowedType
-            $this->assertInstanceOf(TicketSaleListResponse::class, $item);
+            $this->assertInstanceOf(TicketSale::class, $item);
         }
     }
 
@@ -133,7 +131,7 @@ final class TicketSalesTest extends TestCase
             $this->markTestSkipped('Mock server tests are disabled');
         }
 
-        $result = $this->client->client->ticketSales->delete('ticket_sale_id');
+        $result = $this->client->ticketSales->delete('ticket_sale_id');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertNull($result);

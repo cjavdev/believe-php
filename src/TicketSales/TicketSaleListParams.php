@@ -2,9 +2,8 @@
 
 declare(strict_types=1);
 
-namespace Believe\Client\TicketSales;
+namespace Believe\TicketSales;
 
-use Believe\Client\TicketSales\TicketSaleListParams\PurchaseMethod;
 use Believe\Core\Attributes\Optional;
 use Believe\Core\Concerns\SdkModel;
 use Believe\Core\Concerns\SdkParams;
@@ -13,7 +12,7 @@ use Believe\Core\Contracts\BaseModel;
 /**
  * Get a paginated list of all ticket sales with optional filtering. With 300 records, this endpoint is ideal for practicing pagination.
  *
- * @see Believe\Services\Client\TicketSalesService::list()
+ * @see Believe\Services\TicketSalesService::list()
  *
  * @phpstan-type TicketSaleListParamsShape = array{
  *   couponCode?: string|null,

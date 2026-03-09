@@ -2,19 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Believe\Services\Client;
+namespace Believe\Services;
 
 use Believe\Client;
-use Believe\Client\TicketSales\TicketSaleCreateParams\PurchaseMethod;
-use Believe\Client\TicketSales\TicketSaleGetResponse;
-use Believe\Client\TicketSales\TicketSaleListResponse;
-use Believe\Client\TicketSales\TicketSaleNewResponse;
-use Believe\Client\TicketSales\TicketSaleUpdateResponse;
 use Believe\Core\Exceptions\APIException;
 use Believe\Core\Util;
 use Believe\RequestOptions;
-use Believe\ServiceContracts\Client\TicketSalesContract;
+use Believe\ServiceContracts\TicketSalesContract;
 use Believe\SkipLimitPage;
+use Believe\TicketSales\PurchaseMethod;
+use Believe\TicketSales\TicketSale;
 
 /**
  * Ticket sales with 300 records for practicing pagination, filtering, and financial data.
@@ -71,7 +68,7 @@ final class TicketSalesService implements TicketSalesContract
         ?string $buyerEmail = null,
         ?string $couponCode = null,
         RequestOptions|array|null $requestOptions = null,
-    ): TicketSaleNewResponse {
+    ): TicketSale {
         $params = Util::removeNulls(
             [
                 'buyerName' => $buyerName,
@@ -107,7 +104,7 @@ final class TicketSalesService implements TicketSalesContract
     public function retrieve(
         string $ticketSaleID,
         RequestOptions|array|null $requestOptions = null
-    ): TicketSaleGetResponse {
+    ): TicketSale {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieve($ticketSaleID, requestOptions: $requestOptions);
 
@@ -119,7 +116,7 @@ final class TicketSalesService implements TicketSalesContract
      *
      * Update specific fields of an existing ticket sale.
      *
-     * @param Client\TicketSales\TicketSaleUpdateParams\PurchaseMethod|value-of<Client\TicketSales\TicketSaleUpdateParams\PurchaseMethod>|null $purchaseMethod how the ticket was purchased
+     * @param PurchaseMethod|value-of<PurchaseMethod>|null $purchaseMethod how the ticket was purchased
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -132,14 +129,14 @@ final class TicketSalesService implements TicketSalesContract
         ?string $currency = null,
         ?string $discount = null,
         ?string $matchID = null,
-        Client\TicketSales\TicketSaleUpdateParams\PurchaseMethod|string|null $purchaseMethod = null,
+        PurchaseMethod|string|null $purchaseMethod = null,
         ?int $quantity = null,
         ?string $subtotal = null,
         ?string $tax = null,
         ?string $total = null,
         ?string $unitPrice = null,
         RequestOptions|array|null $requestOptions = null,
-    ): TicketSaleUpdateResponse {
+    ): TicketSale {
         $params = Util::removeNulls(
             [
                 'buyerEmail' => $buyerEmail,
@@ -172,11 +169,11 @@ final class TicketSalesService implements TicketSalesContract
      * @param string|null $currency Filter by currency (GBP, USD, EUR)
      * @param int $limit Maximum number of items to return (max: 100)
      * @param string|null $matchID Filter by match ID
-     * @param Client\TicketSales\TicketSaleListParams\PurchaseMethod|value-of<Client\TicketSales\TicketSaleListParams\PurchaseMethod>|null $purchaseMethod Filter by purchase method
+     * @param PurchaseMethod|value-of<PurchaseMethod>|null $purchaseMethod Filter by purchase method
      * @param int $skip Number of items to skip (offset)
      * @param RequestOpts|null $requestOptions
      *
-     * @return SkipLimitPage<TicketSaleListResponse>
+     * @return SkipLimitPage<TicketSale>
      *
      * @throws APIException
      */
@@ -185,7 +182,7 @@ final class TicketSalesService implements TicketSalesContract
         ?string $currency = null,
         int $limit = 20,
         ?string $matchID = null,
-        Client\TicketSales\TicketSaleListParams\PurchaseMethod|string|null $purchaseMethod = null,
+        PurchaseMethod|string|null $purchaseMethod = null,
         int $skip = 0,
         RequestOptions|array|null $requestOptions = null,
     ): SkipLimitPage {

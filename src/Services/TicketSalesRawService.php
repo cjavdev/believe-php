@@ -2,23 +2,20 @@
 
 declare(strict_types=1);
 
-namespace Believe\Services\Client;
+namespace Believe\Services;
 
 use Believe\Client;
-use Believe\Client\TicketSales\TicketSaleCreateParams;
-use Believe\Client\TicketSales\TicketSaleCreateParams\PurchaseMethod;
-use Believe\Client\TicketSales\TicketSaleGetResponse;
-use Believe\Client\TicketSales\TicketSaleListParams;
-use Believe\Client\TicketSales\TicketSaleListResponse;
-use Believe\Client\TicketSales\TicketSaleNewResponse;
-use Believe\Client\TicketSales\TicketSaleUpdateParams;
-use Believe\Client\TicketSales\TicketSaleUpdateResponse;
 use Believe\Core\Contracts\BaseResponse;
 use Believe\Core\Exceptions\APIException;
 use Believe\Core\Util;
 use Believe\RequestOptions;
-use Believe\ServiceContracts\Client\TicketSalesRawContract;
+use Believe\ServiceContracts\TicketSalesRawContract;
 use Believe\SkipLimitPage;
+use Believe\TicketSales\PurchaseMethod;
+use Believe\TicketSales\TicketSale;
+use Believe\TicketSales\TicketSaleCreateParams;
+use Believe\TicketSales\TicketSaleListParams;
+use Believe\TicketSales\TicketSaleUpdateParams;
 
 /**
  * Ticket sales with 300 records for practicing pagination, filtering, and financial data.
@@ -54,7 +51,7 @@ final class TicketSalesRawService implements TicketSalesRawContract
      * }|TicketSaleCreateParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<TicketSaleNewResponse>
+     * @return BaseResponse<TicketSale>
      *
      * @throws APIException
      */
@@ -73,7 +70,7 @@ final class TicketSalesRawService implements TicketSalesRawContract
             path: 'ticket-sales',
             body: (object) $parsed,
             options: $options,
-            convert: TicketSaleNewResponse::class,
+            convert: TicketSale::class,
         );
     }
 
@@ -84,7 +81,7 @@ final class TicketSalesRawService implements TicketSalesRawContract
      *
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<TicketSaleGetResponse>
+     * @return BaseResponse<TicketSale>
      *
      * @throws APIException
      */
@@ -97,7 +94,7 @@ final class TicketSalesRawService implements TicketSalesRawContract
             method: 'get',
             path: ['ticket-sales/%1$s', $ticketSaleID],
             options: $requestOptions,
-            convert: TicketSaleGetResponse::class,
+            convert: TicketSale::class,
         );
     }
 
@@ -113,7 +110,7 @@ final class TicketSalesRawService implements TicketSalesRawContract
      *   currency?: string|null,
      *   discount?: string|null,
      *   matchID?: string|null,
-     *   purchaseMethod?: TicketSaleUpdateParams\PurchaseMethod|value-of<TicketSaleUpdateParams\PurchaseMethod>|null,
+     *   purchaseMethod?: PurchaseMethod|value-of<PurchaseMethod>|null,
      *   quantity?: int|null,
      *   subtotal?: string|null,
      *   tax?: string|null,
@@ -122,7 +119,7 @@ final class TicketSalesRawService implements TicketSalesRawContract
      * }|TicketSaleUpdateParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<TicketSaleUpdateResponse>
+     * @return BaseResponse<TicketSale>
      *
      * @throws APIException
      */
@@ -142,7 +139,7 @@ final class TicketSalesRawService implements TicketSalesRawContract
             path: ['ticket-sales/%1$s', $ticketSaleID],
             body: (object) $parsed,
             options: $options,
-            convert: TicketSaleUpdateResponse::class,
+            convert: TicketSale::class,
         );
     }
 
@@ -156,12 +153,12 @@ final class TicketSalesRawService implements TicketSalesRawContract
      *   currency?: string|null,
      *   limit?: int,
      *   matchID?: string|null,
-     *   purchaseMethod?: TicketSaleListParams\PurchaseMethod|value-of<TicketSaleListParams\PurchaseMethod>|null,
+     *   purchaseMethod?: PurchaseMethod|value-of<PurchaseMethod>|null,
      *   skip?: int,
      * }|TicketSaleListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<SkipLimitPage<TicketSaleListResponse>>
+     * @return BaseResponse<SkipLimitPage<TicketSale>>
      *
      * @throws APIException
      */
@@ -187,7 +184,7 @@ final class TicketSalesRawService implements TicketSalesRawContract
                 ],
             ),
             options: $options,
-            convert: TicketSaleListResponse::class,
+            convert: TicketSale::class,
             page: SkipLimitPage::class,
         );
     }
