@@ -62,4 +62,12 @@ enum QuoteTheme: string
     case HONESTY = 'honesty';
 
     case INTEGRITY = 'integrity';
+
+    case INTIMIDATION = 'intimidation';
+
+    case AMBITION = 'ambition';
+
+    case NARCISSISM = 'narcissism';
+
+    case MATURITY = 'maturity';
 }
