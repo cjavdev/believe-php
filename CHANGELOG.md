@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.3.0 (2026-03-09)
+
+Full Changelog: [v0.2.0...v0.3.0](https://github.com/cjavdev/believe-php/compare/v0.2.0...v0.3.0)
+
+### Features
+
+* **api:** add ticket_sales endpoints, update biscuit/quote types ([23eb7b3](https://github.com/cjavdev/believe-php/commit/23eb7b3b0676f62b9903ab9981bc74b1cffa8b44))
+
+
+### Chores
+
+* **internal:** codegen related update ([3ff32d4](https://github.com/cjavdev/believe-php/commit/3ff32d4749654748f4a0f5312faa533f37e840f8))
+* **internal:** upgrade phpunit ([4ff6cbc](https://github.com/cjavdev/believe-php/commit/4ff6cbc9c8d4f5796a23b46a854ebaba5a25c9cf))
+
 ## 0.2.0 (2026-02-21)
 
 Full Changelog: [v0.1.0...v0.2.0](https://github.com/cjavdev/believe-php/compare/v0.1.0...v0.2.0)
