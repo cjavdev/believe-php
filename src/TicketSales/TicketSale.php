@@ -2,9 +2,8 @@
 
 declare(strict_types=1);
 
-namespace Believe\Client\TicketSales;
+namespace Believe\TicketSales;
 
-use Believe\Client\TicketSales\TicketSaleUpdateResponse\PurchaseMethod;
 use Believe\Core\Attributes\Optional;
 use Believe\Core\Attributes\Required;
 use Believe\Core\Concerns\SdkModel;
@@ -13,7 +12,7 @@ use Believe\Core\Contracts\BaseModel;
 /**
  * Full ticket sale model with ID.
  *
- * @phpstan-type TicketSaleUpdateResponseShape = array{
+ * @phpstan-type TicketSaleShape = array{
  *   id: string,
  *   buyerName: string,
  *   currency: string,
@@ -29,9 +28,9 @@ use Believe\Core\Contracts\BaseModel;
  *   couponCode?: string|null,
  * }
  */
-final class TicketSaleUpdateResponse implements BaseModel
+final class TicketSale implements BaseModel
 {
-    /** @use SdkModel<TicketSaleUpdateResponseShape> */
+    /** @use SdkModel<TicketSaleShape> */
     use SdkModel;
 
     /**
@@ -115,11 +114,11 @@ final class TicketSaleUpdateResponse implements BaseModel
     public ?string $couponCode;
 
     /**
-     * `new TicketSaleUpdateResponse()` is missing required properties by the API.
+     * `new TicketSale()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * TicketSaleUpdateResponse::with(
+     * TicketSale::with(
      *   id: ...,
      *   buyerName: ...,
      *   currency: ...,
@@ -137,7 +136,7 @@ final class TicketSaleUpdateResponse implements BaseModel
      * Otherwise ensure the following setters are called
      *
      * ```
-     * (new TicketSaleUpdateResponse)
+     * (new TicketSale)
      *   ->withID(...)
      *   ->withBuyerName(...)
      *   ->withCurrency(...)

@@ -2,19 +2,20 @@
 
 declare(strict_types=1);
 
-namespace Believe\Client\TicketSales;
+namespace Believe\TicketSales;
 
-use Believe\Client\TicketSales\TicketSaleGetResponse\PurchaseMethod;
 use Believe\Core\Attributes\Optional;
 use Believe\Core\Attributes\Required;
 use Believe\Core\Concerns\SdkModel;
+use Believe\Core\Concerns\SdkParams;
 use Believe\Core\Contracts\BaseModel;
 
 /**
- * Full ticket sale model with ID.
+ * Record a new ticket sale.
  *
- * @phpstan-type TicketSaleGetResponseShape = array{
- *   id: string,
+ * @see Believe\Services\TicketSalesService::create()
+ *
+ * @phpstan-type TicketSaleCreateParamsShape = array{
  *   buyerName: string,
  *   currency: string,
  *   discount: string,
@@ -29,16 +30,11 @@ use Believe\Core\Contracts\BaseModel;
  *   couponCode?: string|null,
  * }
  */
-final class TicketSaleGetResponse implements BaseModel
+final class TicketSaleCreateParams implements BaseModel
 {
-    /** @use SdkModel<TicketSaleGetResponseShape> */
+    /** @use SdkModel<TicketSaleCreateParamsShape> */
     use SdkModel;
-
-    /**
-     * Unique identifier.
-     */
-    #[Required]
-    public string $id;
+    use SdkParams;
 
     /**
      * Name of the ticket buyer.
@@ -115,12 +111,11 @@ final class TicketSaleGetResponse implements BaseModel
     public ?string $couponCode;
 
     /**
-     * `new TicketSaleGetResponse()` is missing required properties by the API.
+     * `new TicketSaleCreateParams()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * TicketSaleGetResponse::with(
-     *   id: ...,
+     * TicketSaleCreateParams::with(
      *   buyerName: ...,
      *   currency: ...,
      *   discount: ...,
@@ -137,8 +132,7 @@ final class TicketSaleGetResponse implements BaseModel
      * Otherwise ensure the following setters are called
      *
      * ```
-     * (new TicketSaleGetResponse)
-     *   ->withID(...)
+     * (new TicketSaleCreateParams)
      *   ->withBuyerName(...)
      *   ->withCurrency(...)
      *   ->withDiscount(...)
@@ -164,7 +158,6 @@ final class TicketSaleGetResponse implements BaseModel
      * @param PurchaseMethod|value-of<PurchaseMethod> $purchaseMethod
      */
     public static function with(
-        string $id,
         string $buyerName,
         string $currency,
         string $discount,
@@ -180,7 +173,6 @@ final class TicketSaleGetResponse implements BaseModel
     ): self {
         $self = new self;
 
-        $self['id'] = $id;
         $self['buyerName'] = $buyerName;
         $self['currency'] = $currency;
         $self['discount'] = $discount;
@@ -194,17 +186,6 @@ final class TicketSaleGetResponse implements BaseModel
 
         null !== $buyerEmail && $self['buyerEmail'] = $buyerEmail;
         null !== $couponCode && $self['couponCode'] = $couponCode;
-
-        return $self;
-    }
-
-    /**
-     * Unique identifier.
-     */
-    public function withID(string $id): self
-    {
-        $self = clone $this;
-        $self['id'] = $id;
 
         return $self;
     }
