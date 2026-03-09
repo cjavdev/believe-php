@@ -12,6 +12,8 @@ use Believe\RequestOptions;
 use Believe\ServiceContracts\PepTalkContract;
 
 /**
+ * Server-Sent Events (SSE) streaming endpoints.
+ *
  * @phpstan-import-type RequestOpts from \Believe\RequestOptions
  */
 final class PepTalkService implements PepTalkContract

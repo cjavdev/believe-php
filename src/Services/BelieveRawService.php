@@ -14,6 +14,8 @@ use Believe\RequestOptions;
 use Believe\ServiceContracts\BelieveRawContract;
 
 /**
+ * Interactive endpoints for motivation and guidance.
+ *
  * @phpstan-import-type RequestOpts from \Believe\RequestOptions
  */
 final class BelieveRawService implements BelieveRawContract

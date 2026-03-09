@@ -13,6 +13,8 @@ use Believe\RequestOptions;
 use Believe\ServiceContracts\ConflictsContract;
 
 /**
+ * Interactive endpoints for motivation and guidance.
+ *
  * @phpstan-import-type RequestOpts from \Believe\RequestOptions
  */
 final class ConflictsService implements ConflictsContract

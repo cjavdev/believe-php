@@ -13,6 +13,8 @@ use Believe\ServiceContracts\EpisodesContract;
 use Believe\SkipLimitPage;
 
 /**
+ * Operations related to TV episodes.
+ *
  * @phpstan-import-type RequestOpts from \Believe\RequestOptions
  */
 final class EpisodesService implements EpisodesContract

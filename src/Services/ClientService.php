@@ -6,6 +6,7 @@ namespace Believe\Services;
 
 use Believe\Client;
 use Believe\ServiceContracts\ClientContract;
+use Believe\Services\Client\TicketSalesService;
 use Believe\Services\Client\WsService;
 
 final class ClientService implements ClientContract
@@ -21,11 +22,17 @@ final class ClientService implements ClientContract
     public WsService $ws;
 
     /**
+     * @api
+     */
+    public TicketSalesService $ticketSales;
+
+    /**
      * @internal
      */
     public function __construct(private Client $client)
     {
         $this->raw = new ClientRawService($client);
         $this->ws = new WsService($client);
+        $this->ticketSales = new TicketSalesService($client);
     }
 }

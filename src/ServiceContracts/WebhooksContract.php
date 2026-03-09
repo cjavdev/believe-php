@@ -5,8 +5,11 @@ declare(strict_types=1);
 namespace Believe\ServiceContracts;
 
 use Believe\Core\Exceptions\APIException;
+use Believe\Core\Exceptions\WebhookException;
 use Believe\RequestOptions;
+use Believe\Webhooks\MatchCompletedWebhookEvent;
 use Believe\Webhooks\RegisteredWebhook;
+use Believe\Webhooks\TeamMemberTransferredWebhookEvent;
 use Believe\Webhooks\WebhookNewResponse;
 use Believe\Webhooks\WebhookTriggerEventParams\EventType;
 use Believe\Webhooks\WebhookTriggerEventParams\Payload\MatchCompletedPayload;
@@ -89,4 +92,19 @@ interface WebhooksContract
         MatchCompletedPayload|array|TeamMemberTransferredPayload|null $payload = null,
         RequestOptions|array|null $requestOptions = null,
     ): WebhookTriggerEventResponse;
+
+    /**
+     * @api
+     *
+     * Unwraps a webhook event from its JSON representation.
+     *
+     * @param array<string,string|list<string>>|null $headers
+     *
+     * @throws WebhookException
+     */
+    public function unwrap(
+        string $body,
+        ?array $headers = null,
+        ?string $secret = null
+    ): MatchCompletedWebhookEvent|TeamMemberTransferredWebhookEvent;
 }

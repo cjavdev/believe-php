@@ -11,6 +11,8 @@ use Believe\RequestOptions;
 use Believe\ServiceContracts\StreamRawContract;
 
 /**
+ * Server-Sent Events (SSE) streaming endpoints.
+ *
  * @phpstan-import-type RequestOpts from \Believe\RequestOptions
  */
 final class StreamRawService implements StreamRawContract

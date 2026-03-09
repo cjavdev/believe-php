@@ -10,6 +10,8 @@ use Believe\RequestOptions;
 use Believe\ServiceContracts\Matches\CommentaryContract;
 
 /**
+ * Server-Sent Events (SSE) streaming endpoints.
+ *
  * @phpstan-import-type RequestOpts from \Believe\RequestOptions
  */
 final class CommentaryService implements CommentaryContract
