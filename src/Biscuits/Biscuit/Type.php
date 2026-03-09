@@ -16,4 +16,8 @@ enum Type: string
     case CHOCOLATE_CHIP = 'chocolate_chip';
 
     case OATMEAL_RAISIN = 'oatmeal_raisin';
+
+    case SNICKERDOODLE = 'snickerdoodle';
+
+    case LEMON_DRIZZLE = 'lemon_drizzle';
 }
