@@ -98,13 +98,9 @@ interface WebhooksContract
      *
      * Unwraps a webhook event from its JSON representation.
      *
-     * @param array<string,string|list<string>>|null $headers
-     *
      * @throws WebhookException
      */
     public function unwrap(
-        string $body,
-        ?array $headers = null,
-        ?string $secret = null
+        string $body
     ): MatchCompletedWebhookEvent|TeamMemberTransferredWebhookEvent;
 }
