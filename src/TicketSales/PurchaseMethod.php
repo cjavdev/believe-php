@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Believe\Client\TicketSales\TicketSaleListParams;
+namespace Believe\TicketSales;
 
 /**
- * Filter by purchase method.
+ * How the ticket was purchased.
  */
 enum PurchaseMethod: string
 {

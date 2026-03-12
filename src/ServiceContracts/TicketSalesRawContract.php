@@ -2,19 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Believe\ServiceContracts\Client;
+namespace Believe\ServiceContracts;
 
-use Believe\Client\TicketSales\TicketSaleCreateParams;
-use Believe\Client\TicketSales\TicketSaleGetResponse;
-use Believe\Client\TicketSales\TicketSaleListParams;
-use Believe\Client\TicketSales\TicketSaleListResponse;
-use Believe\Client\TicketSales\TicketSaleNewResponse;
-use Believe\Client\TicketSales\TicketSaleUpdateParams;
-use Believe\Client\TicketSales\TicketSaleUpdateResponse;
 use Believe\Core\Contracts\BaseResponse;
 use Believe\Core\Exceptions\APIException;
 use Believe\RequestOptions;
 use Believe\SkipLimitPage;
+use Believe\TicketSales\TicketSale;
+use Believe\TicketSales\TicketSaleCreateParams;
+use Believe\TicketSales\TicketSaleListParams;
+use Believe\TicketSales\TicketSaleUpdateParams;
 
 /**
  * @phpstan-import-type RequestOpts from \Believe\RequestOptions
@@ -27,7 +24,7 @@ interface TicketSalesRawContract
      * @param array<string,mixed>|TicketSaleCreateParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<TicketSaleNewResponse>
+     * @return BaseResponse<TicketSale>
      *
      * @throws APIException
      */
@@ -41,7 +38,7 @@ interface TicketSalesRawContract
      *
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<TicketSaleGetResponse>
+     * @return BaseResponse<TicketSale>
      *
      * @throws APIException
      */
@@ -56,7 +53,7 @@ interface TicketSalesRawContract
      * @param array<string,mixed>|TicketSaleUpdateParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<TicketSaleUpdateResponse>
+     * @return BaseResponse<TicketSale>
      *
      * @throws APIException
      */
@@ -72,7 +69,7 @@ interface TicketSalesRawContract
      * @param array<string,mixed>|TicketSaleListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<SkipLimitPage<TicketSaleListResponse>>
+     * @return BaseResponse<SkipLimitPage<TicketSale>>
      *
      * @throws APIException
      */

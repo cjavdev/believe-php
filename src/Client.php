@@ -25,6 +25,7 @@ use Believe\Services\ReframeService;
 use Believe\Services\StreamService;
 use Believe\Services\TeamMembersService;
 use Believe\Services\TeamsService;
+use Believe\Services\TicketSalesService;
 use Believe\Services\VersionService;
 use Believe\Services\WebhooksService;
 use Http\Discovery\Psr17FactoryDiscovery;
@@ -116,6 +117,11 @@ class Client extends BaseClient
     /**
      * @api
      */
+    public TicketSalesService $ticketSales;
+
+    /**
+     * @api
+     */
     public HealthService $health;
 
     /**
@@ -191,6 +197,7 @@ class Client extends BaseClient
         $this->stream = new StreamService($this);
         $this->teamMembers = new TeamMembersService($this);
         $this->webhooks = new WebhooksService($this);
+        $this->ticketSales = new TicketSalesService($this);
         $this->health = new HealthService($this);
         $this->version = new VersionService($this);
         $this->client = new ClientService($this);
