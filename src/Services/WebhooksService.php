@@ -5,11 +5,16 @@ declare(strict_types=1);
 namespace Believe\Services;
 
 use Believe\Client;
+use Believe\Core\Conversion;
 use Believe\Core\Exceptions\APIException;
+use Believe\Core\Exceptions\WebhookException;
 use Believe\Core\Util;
 use Believe\RequestOptions;
 use Believe\ServiceContracts\WebhooksContract;
+use Believe\Webhooks\MatchCompletedWebhookEvent;
 use Believe\Webhooks\RegisteredWebhook;
+use Believe\Webhooks\TeamMemberTransferredWebhookEvent;
+use Believe\Webhooks\UnwrapWebhookEvent;
 use Believe\Webhooks\WebhookNewResponse;
 use Believe\Webhooks\WebhookTriggerEventParams\EventType;
 use Believe\Webhooks\WebhookTriggerEventParams\Payload\MatchCompletedPayload;
@@ -195,5 +200,25 @@ final class WebhooksService implements WebhooksContract
         $response = $this->raw->triggerEvent(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
+    }
+
+    /**
+     * @api
+     *
+     * Unwraps a webhook event from its JSON representation.
+     *
+     * @throws WebhookException
+     */
+    public function unwrap(
+        string $body
+    ): MatchCompletedWebhookEvent|TeamMemberTransferredWebhookEvent {
+        try {
+            $decoded = Util::decodeJson($body);
+
+            // @phpstan-ignore return.type
+            return Conversion::coerce(UnwrapWebhookEvent::class, value: $decoded);
+        } catch (\Throwable $e) {
+            throw new WebhookException('Error parsing webhook body', previous: $e);
+        }
     }
 }
