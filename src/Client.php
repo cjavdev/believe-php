@@ -20,6 +20,7 @@ use Believe\Services\ReframeService;
 use Believe\Services\StreamService;
 use Believe\Services\TeamMembersService;
 use Believe\Services\TeamsService;
+use Believe\Services\WebhooksService;
 use Http\Discovery\Psr17FactoryDiscovery;
 use Http\Discovery\Psr18ClientDiscovery;
 
@@ -102,6 +103,11 @@ class Client extends BaseClient
     public TeamMembersService $teamMembers;
 
     /**
+     * @api
+     */
+    public WebhooksService $webhooks;
+
+    /**
      * @param RequestOpts|null $requestOptions
      */
     public function __construct(
@@ -153,6 +159,7 @@ class Client extends BaseClient
         $this->pepTalk = new PepTalkService($this);
         $this->stream = new StreamService($this);
         $this->teamMembers = new TeamMembersService($this);
+        $this->webhooks = new WebhooksService($this);
     }
 
     /** @return array<string,string> */
