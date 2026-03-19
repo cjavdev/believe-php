@@ -12,9 +12,11 @@ use Believe\Services\BelieveClientService;
 use Believe\Services\BelieveService;
 use Believe\Services\BiscuitsService;
 use Believe\Services\CharactersService;
+use Believe\Services\ClientService;
 use Believe\Services\CoachingService;
 use Believe\Services\ConflictsService;
 use Believe\Services\EpisodesService;
+use Believe\Services\HealthService;
 use Believe\Services\MatchesService;
 use Believe\Services\PepTalkService;
 use Believe\Services\PressService;
@@ -24,6 +26,7 @@ use Believe\Services\StreamService;
 use Believe\Services\TeamMembersService;
 use Believe\Services\TeamsService;
 use Believe\Services\TicketSalesService;
+use Believe\Services\VersionService;
 use Believe\Services\WebhooksService;
 use Http\Discovery\Psr17FactoryDiscovery;
 use Http\Discovery\Psr18ClientDiscovery;
@@ -119,6 +122,21 @@ class Client extends BaseClient
     /**
      * @api
      */
+    public HealthService $health;
+
+    /**
+     * @api
+     */
+    public VersionService $version;
+
+    /**
+     * @api
+     */
+    public ClientService $client;
+
+    /**
+     * @api
+     */
     public BelieveClientRawService $raw;
 
     /**
@@ -180,6 +198,9 @@ class Client extends BaseClient
         $this->teamMembers = new TeamMembersService($this);
         $this->webhooks = new WebhooksService($this);
         $this->ticketSales = new TicketSalesService($this);
+        $this->health = new HealthService($this);
+        $this->version = new VersionService($this);
+        $this->client = new ClientService($this);
         $this->raw = new BelieveClientRawService($this);
         $this->believeClientService = new BelieveClientService($this);
     }
