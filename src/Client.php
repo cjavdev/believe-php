@@ -5,7 +5,10 @@ declare(strict_types=1);
 namespace Believe;
 
 use Believe\Core\BaseClient;
+use Believe\Core\Exceptions\APIException;
 use Believe\Core\Util;
+use Believe\Services\BelieveClientRawService;
+use Believe\Services\BelieveClientService;
 use Believe\Services\BelieveService;
 use Believe\Services\BiscuitsService;
 use Believe\Services\CharactersService;
@@ -20,6 +23,7 @@ use Believe\Services\ReframeService;
 use Believe\Services\StreamService;
 use Believe\Services\TeamMembersService;
 use Believe\Services\TeamsService;
+use Believe\Services\TicketSalesService;
 use Believe\Services\WebhooksService;
 use Http\Discovery\Psr17FactoryDiscovery;
 use Http\Discovery\Psr18ClientDiscovery;
@@ -108,6 +112,21 @@ class Client extends BaseClient
     public WebhooksService $webhooks;
 
     /**
+     * @api
+     */
+    public TicketSalesService $ticketSales;
+
+    /**
+     * @api
+     */
+    public BelieveClientRawService $raw;
+
+    /**
+     * @api
+     */
+    private BelieveClientService $believeClientService;
+
+    /**
      * @param RequestOpts|null $requestOptions
      */
     public function __construct(
@@ -160,6 +179,24 @@ class Client extends BaseClient
         $this->stream = new StreamService($this);
         $this->teamMembers = new TeamMembersService($this);
         $this->webhooks = new WebhooksService($this);
+        $this->ticketSales = new TicketSalesService($this);
+        $this->raw = new BelieveClientRawService($this);
+        $this->believeClientService = new BelieveClientService($this);
+    }
+
+    /**
+     * @api
+     *
+     * Get a warm welcome and overview of available endpoints.
+     *
+     * @param RequestOpts|null $requestOptions
+     *
+     * @throws APIException
+     */
+    public function getWelcome(
+        RequestOptions|array|null $requestOptions = null
+    ): mixed {
+        return $this->believeClientService->getWelcome($requestOptions);
     }
 
     /** @return array<string,string> */
