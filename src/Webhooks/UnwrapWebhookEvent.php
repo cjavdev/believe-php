@@ -21,19 +21,14 @@ final class UnwrapWebhookEvent implements ConverterSource
 {
     use SdkUnion;
 
-    public static function discriminator(): string
-    {
-        return 'eventType';
-    }
-
     /**
      * @return list<string|Converter|ConverterSource>|array<string,string|Converter|ConverterSource>
      */
     public static function variants(): array
     {
         return [
-            'match.completed' => MatchCompletedWebhookEvent::class,
-            'team_member.transferred' => TeamMemberTransferredWebhookEvent::class,
+            MatchCompletedWebhookEvent::class,
+            TeamMemberTransferredWebhookEvent::class,
         ];
     }
 }
