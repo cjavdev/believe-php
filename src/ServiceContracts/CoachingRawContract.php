@@ -4,4 +4,12 @@ declare(strict_types=1);
 
 namespace Believe\ServiceContracts;
 
-interface CoachingRawContract {}
+/**
+  *
+  *
+ */
+interface CoachingRawContract{
+
+
+
+}

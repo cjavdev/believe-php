@@ -15,7 +15,7 @@ final class EnumOf implements Converter
     private readonly string $type;
 
     /**
-     * @param list<bool|float|int|string|null> $members
+     * @param list<null|bool|float|int|string> $members
      */
     public function __construct(private readonly array $members)
     {
@@ -24,6 +24,17 @@ final class EnumOf implements Converter
             $type = gettype($member);
         }
         $this->type = $type;
+    }
+
+    private function tally(mixed $value, CoerceState | DumpState $state): void
+    {
+        if (in_array($value, haystack: $this->members, strict: true)) {
+            ++$state->yes;
+        } elseif ($this->type === gettype($value)) {
+            ++$state->maybe;
+        } else {
+            ++$state->no;
+        }
     }
 
     public function coerce(mixed $value, CoerceState $state): mixed
@@ -38,16 +49,5 @@ final class EnumOf implements Converter
         $this->tally($value, state: $state);
 
         return Conversion::dump_unknown($value, state: $state);
-    }
-
-    private function tally(mixed $value, CoerceState|DumpState $state): void
-    {
-        if (in_array($value, haystack: $this->members, strict: true)) {
-            ++$state->yes;
-        } elseif ($this->type === gettype($value)) {
-            ++$state->maybe;
-        } else {
-            ++$state->no;
-        }
     }
 }

@@ -2,16 +2,15 @@
 
 namespace Believe\Core\Implementation;
 
+use Psr\Http\Message\RequestInterface;
+use Psr\Http\Message\ResponseInterface;
 use Believe\Core\BaseClient;
 use Believe\Core\Concerns\ResponseProxy;
 use Believe\Core\Contracts\BaseResponse;
 use Believe\Core\Conversion;
-use Believe\Core\Conversion\Contracts\Converter;
-use Believe\Core\Conversion\Contracts\ConverterSource;
+use Believe\Core\Conversion\Contracts\{Converter, ConverterSource};
 use Believe\Core\Util;
 use Believe\RequestOptions;
-use Psr\Http\Message\RequestInterface;
-use Psr\Http\Message\ResponseInterface;
 
 /**
  * @phpstan-import-type NormalizedRequest from \Believe\Core\BaseClient
@@ -27,7 +26,6 @@ class RawResponse implements BaseResponse
     use ResponseProxy;
 
     private mixed $decodedBody;
-
     /** @var R */
     private mixed $coercedResponse;
 
@@ -36,6 +34,7 @@ class RawResponse implements BaseResponse
 
     /**
      * @param NormalizedRequest $requestInfo
+     *
      * @param list<string|int>|string|int|null $unwrap
      */
     public function __construct(
@@ -48,11 +47,26 @@ class RawResponse implements BaseResponse
         private Converter|ConverterSource|string $convert,
         private ?string $page,
         private ?string $stream,
-    ) {}
+    ) {
+    }
 
     public function getRequest(): RequestInterface
     {
         return $this->request;
+    }
+
+    private function getDecoded(): mixed
+    {
+        if (!$this->decoded) {
+            $decoded = Util::decodeContent($this->response);
+            if (!is_null($this->unwrap)) {
+                $decoded = Util::dig($decoded, key: $this->unwrap);
+            }
+            $this->decodedBody = $decoded;
+            $this->decoded = true;
+        }
+
+        return $this->decodedBody;
     }
 
     public function parse(): mixed
@@ -88,19 +102,5 @@ class RawResponse implements BaseResponse
         }
 
         return $this->coercedResponse;
-    }
-
-    private function getDecoded(): mixed
-    {
-        if (!$this->decoded) {
-            $decoded = Util::decodeContent($this->response);
-            if (!is_null($this->unwrap)) {
-                $decoded = Util::dig($decoded, key: $this->unwrap);
-            }
-            $this->decodedBody = $decoded;
-            $this->decoded = true;
-        }
-
-        return $this->decodedBody;
     }
 }

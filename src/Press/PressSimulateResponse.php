@@ -10,152 +10,178 @@ use Believe\Core\Concerns\SdkModel;
 use Believe\Core\Contracts\BaseModel;
 
 /**
- * Ted's press conference response.
- *
- * @phpstan-type PressSimulateResponseShape = array{
- *   actualWisdom: string,
- *   followUpDodge: string,
- *   reporterReaction: string,
- *   response: string,
- *   deflectionHumor?: string|null,
- * }
+  * Ted's press conference response.
+  *
+  * @phpstan-type PressSimulateResponseShape = array{
+  *   actualWisdom: string,
+  *   followUpDodge: string,
+  *   reporterReaction: string,
+  *   response: string,
+  *   deflectionHumor?: string|null,
+  * }
+  *
  */
 final class PressSimulateResponse implements BaseModel
 {
-    /** @use SdkModel<PressSimulateResponseShape> */
-    use SdkModel;
+  /** @use SdkModel<PressSimulateResponseShape> */
+  use SdkModel;
 
-    /**
-     * The actual wisdom beneath the humor.
-     */
-    #[Required('actual_wisdom')]
-    public string $actualWisdom;
+  /**
+  * The actual wisdom beneath the humor
+  *
+  * @var string $actualWisdom
+ */
+  #[Required('actual_wisdom')]
+  public string $actualWisdom;
 
-    /**
-     * How Ted would dodge a follow-up.
-     */
-    #[Required('follow_up_dodge')]
-    public string $followUpDodge;
+  /**
+  * How Ted would dodge a follow-up
+  *
+  * @var string $followUpDodge
+ */
+  #[Required('follow_up_dodge')]
+  public string $followUpDodge;
 
-    /**
-     * How reporters would react.
-     */
-    #[Required('reporter_reaction')]
-    public string $reporterReaction;
+  /**
+  * How reporters would react
+  *
+  * @var string $reporterReaction
+ */
+  #[Required('reporter_reaction')]
+  public string $reporterReaction;
 
-    /**
-     * Ted's press conference answer.
-     */
-    #[Required]
-    public string $response;
+  /**
+  * Ted's press conference answer
+  *
+  * @var string $response
+ */
+  #[Required]
+  public string $response;
 
-    /**
-     * Humorous deflection if appropriate.
-     */
-    #[Optional('deflection_humor', nullable: true)]
-    public ?string $deflectionHumor;
+  /**
+  * Humorous deflection if appropriate
+  *
+  * @var string|null $deflectionHumor
+ */
+  #[Optional('deflection_humor', nullable: true)]
+  public ?string $deflectionHumor;
 
-    /**
-     * `new PressSimulateResponse()` is missing required properties by the API.
-     *
-     * To enforce required parameters use
-     * ```
-     * PressSimulateResponse::with(
-     *   actualWisdom: ..., followUpDodge: ..., reporterReaction: ..., response: ...
-     * )
-     * ```
-     *
-     * Otherwise ensure the following setters are called
-     *
-     * ```
-     * (new PressSimulateResponse)
-     *   ->withActualWisdom(...)
-     *   ->withFollowUpDodge(...)
-     *   ->withReporterReaction(...)
-     *   ->withResponse(...)
-     * ```
-     */
-    public function __construct()
-    {
-        $this->initialize();
-    }
+  /**
+  * `new PressSimulateResponse()` is missing required properties by the API.
+  *
+  * To enforce required parameters use
+  * ```
+  * PressSimulateResponse::with(
+  *   actualWisdom: ..., followUpDodge: ..., reporterReaction: ..., response: ...
+  * )
+  * ```
+  *
+  * Otherwise ensure the following setters are called
+  *
+  * ```
+  * (new PressSimulateResponse)
+  *   ->withActualWisdom(...)
+  *   ->withFollowUpDodge(...)
+  *   ->withReporterReaction(...)
+  *   ->withResponse(...)
+  * ```
+ */
+  public function __construct() {$this->initialize();}
 
-    /**
-     * Construct an instance from the required parameters.
-     *
-     * You must use named parameters to construct any parameters with a default value.
-     */
-    public static function with(
-        string $actualWisdom,
-        string $followUpDodge,
-        string $reporterReaction,
-        string $response,
-        ?string $deflectionHumor = null,
-    ): self {
-        $self = new self;
+  /**
+  * Construct an instance from the required parameters.
+  *
+  * You must use named parameters to construct any parameters with a default value.
+  *
+  * @param string $actualWisdom
+  * @param string $followUpDodge
+  * @param string $reporterReaction
+  * @param string $response
+  * @param string|null $deflectionHumor
+  *
+  * @return self
+ */
+  public static function with(
+    string $actualWisdom,
+    string $followUpDodge,
+    string $reporterReaction,
+    string $response,
+    ?string $deflectionHumor = null,
+  ): self {
+    $self = new self;
 
-        $self['actualWisdom'] = $actualWisdom;
-        $self['followUpDodge'] = $followUpDodge;
-        $self['reporterReaction'] = $reporterReaction;
-        $self['response'] = $response;
+    $self['actualWisdom'] = $actualWisdom;
+    $self['followUpDodge'] = $followUpDodge;
+    $self['reporterReaction'] = $reporterReaction;
+    $self['response'] = $response;
 
-        null !== $deflectionHumor && $self['deflectionHumor'] = $deflectionHumor;
+    null !== $deflectionHumor && $self['deflectionHumor'] = $deflectionHumor;
 
-        return $self;
-    }
+    return $self;
+  }
 
-    /**
-     * The actual wisdom beneath the humor.
-     */
-    public function withActualWisdom(string $actualWisdom): self
-    {
-        $self = clone $this;
-        $self['actualWisdom'] = $actualWisdom;
+  /**
+  * The actual wisdom beneath the humor
+  *
+  * @param string $actualWisdom
+  *
+  * @return self
+ */
+  public function withActualWisdom(string $actualWisdom): self {
+    $self = clone $this;
+    $self['actualWisdom'] = $actualWisdom;
+    return $self;
+  }
 
-        return $self;
-    }
+  /**
+  * How Ted would dodge a follow-up
+  *
+  * @param string $followUpDodge
+  *
+  * @return self
+ */
+  public function withFollowUpDodge(string $followUpDodge): self {
+    $self = clone $this;
+    $self['followUpDodge'] = $followUpDodge;
+    return $self;
+  }
 
-    /**
-     * How Ted would dodge a follow-up.
-     */
-    public function withFollowUpDodge(string $followUpDodge): self
-    {
-        $self = clone $this;
-        $self['followUpDodge'] = $followUpDodge;
+  /**
+  * How reporters would react
+  *
+  * @param string $reporterReaction
+  *
+  * @return self
+ */
+  public function withReporterReaction(string $reporterReaction): self {
+    $self = clone $this;
+    $self['reporterReaction'] = $reporterReaction;
+    return $self;
+  }
 
-        return $self;
-    }
+  /**
+  * Ted's press conference answer
+  *
+  * @param string $response
+  *
+  * @return self
+ */
+  public function withResponse(string $response): self {
+    $self = clone $this;
+    $self['response'] = $response;
+    return $self;
+  }
 
-    /**
-     * How reporters would react.
-     */
-    public function withReporterReaction(string $reporterReaction): self
-    {
-        $self = clone $this;
-        $self['reporterReaction'] = $reporterReaction;
-
-        return $self;
-    }
-
-    /**
-     * Ted's press conference answer.
-     */
-    public function withResponse(string $response): self
-    {
-        $self = clone $this;
-        $self['response'] = $response;
-
-        return $self;
-    }
-
-    /**
-     * Humorous deflection if appropriate.
-     */
-    public function withDeflectionHumor(?string $deflectionHumor): self
-    {
-        $self = clone $this;
-        $self['deflectionHumor'] = $deflectionHumor;
-
-        return $self;
-    }
+  /**
+  * Humorous deflection if appropriate
+  *
+  * @param string|null $deflectionHumor
+  *
+  * @return self
+ */
+  public function withDeflectionHumor(?string $deflectionHumor): self {
+    $self = clone $this;
+    $self['deflectionHumor'] = $deflectionHumor;
+    return $self;
+  }
 }

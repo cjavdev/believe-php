@@ -5,8 +5,7 @@ declare(strict_types=1);
 namespace Believe\Core;
 
 use Believe\Core\Conversion\CoerceState;
-use Believe\Core\Conversion\Contracts\Converter;
-use Believe\Core\Conversion\Contracts\ConverterSource;
+use Believe\Core\Conversion\Contracts\{Converter, ConverterSource};
 use Believe\Core\Conversion\DumpState;
 
 /**
@@ -45,41 +44,7 @@ final class Conversion
         return $value;
     }
 
-    public static function coerce(Converter|ConverterSource|string $target, mixed $value, CoerceState $state = new CoerceState): mixed
-    {
-        if ($value instanceof $target) {
-            ++$state->yes;
-
-            return $value;
-        }
-
-        if (is_a($target, class: ConverterSource::class, allow_string: true)) {
-            $target = $target::converter();
-        }
-
-        if ($target instanceof Converter) {
-            return $target->coerce($value, state: $state);
-        }
-
-        return self::tryConvert($target, value: $value, state: $state);
-    }
-
-    public static function dump(Converter|ConverterSource|string $target, mixed $value, DumpState $state = new DumpState): mixed
-    {
-        if ($target instanceof Converter) {
-            return $target->dump($value, state: $state);
-        }
-
-        if (is_a($target, class: ConverterSource::class, allow_string: true)) {
-            return $target::converter()->dump($value, state: $state);
-        }
-
-        self::tryConvert($target, value: $value, state: $state);
-
-        return self::dump_unknown($value, state: $state);
-    }
-
-    private static function tryConvert(Converter|ConverterSource|string $target, mixed $value, CoerceState|DumpState $state): mixed
+    private static function tryConvert(Converter|ConverterSource|string $target, mixed $value, CoerceState | DumpState $state): mixed
     {
         switch ($target) {
             case 'mixed':
@@ -206,5 +171,39 @@ final class Conversion
 
                 return $value;
         }
+    }
+
+    public static function coerce(Converter|ConverterSource|string $target, mixed $value, CoerceState $state = new CoerceState()): mixed
+    {
+        if ($value instanceof $target) {
+            ++$state->yes;
+
+            return $value;
+        }
+
+        if (is_a($target, class: ConverterSource::class, allow_string: true)) {
+            $target = $target::converter();
+        }
+
+        if ($target instanceof Converter) {
+            return $target->coerce($value, state: $state);
+        }
+
+
+        return static::tryConvert($target, value: $value, state: $state);
+    }
+
+    public static function dump(Converter|ConverterSource|string $target, mixed $value, DumpState $state = new DumpState()): mixed
+    {
+        if ($target instanceof Converter) {
+            return $target->dump($value, state: $state);
+        }
+
+        if (is_a($target, class: ConverterSource::class, allow_string: true)) {
+            return $target::converter()->dump($value, state: $state);
+        }
+
+        static::tryConvert($target, value: $value, state: $state);
+        return self::dump_unknown($value, state: $state);
     }
 }

@@ -9,156 +9,182 @@ use Believe\Core\Concerns\SdkModel;
 use Believe\Core\Contracts\BaseModel;
 
 /**
- * Emotional intelligence statistics for a character.
- *
- * @phpstan-type EmotionalStatsShape = array{
- *   curiosity: int,
- *   empathy: int,
- *   optimism: int,
- *   resilience: int,
- *   vulnerability: int,
- * }
+  * Emotional intelligence statistics for a character.
+  *
+  * @phpstan-type EmotionalStatsShape = array{
+  *   curiosity: int,
+  *   empathy: int,
+  *   optimism: int,
+  *   resilience: int,
+  *   vulnerability: int,
+  * }
+  *
  */
 final class EmotionalStats implements BaseModel
 {
-    /** @use SdkModel<EmotionalStatsShape> */
-    use SdkModel;
+  /** @use SdkModel<EmotionalStatsShape> */
+  use SdkModel;
 
-    /**
-     * Level of curiosity over judgment (0-100).
-     */
-    #[Required]
-    public int $curiosity;
+  /**
+  * Level of curiosity over judgment (0-100)
+  *
+  * @var int $curiosity
+ */
+  #[Required]
+  public int $curiosity;
 
-    /**
-     * Capacity for empathy (0-100).
-     */
-    #[Required]
-    public int $empathy;
+  /**
+  * Capacity for empathy (0-100)
+  *
+  * @var int $empathy
+ */
+  #[Required]
+  public int $empathy;
 
-    /**
-     * Level of optimism (0-100).
-     */
-    #[Required]
-    public int $optimism;
+  /**
+  * Level of optimism (0-100)
+  *
+  * @var int $optimism
+ */
+  #[Required]
+  public int $optimism;
 
-    /**
-     * Bounce-back ability (0-100).
-     */
-    #[Required]
-    public int $resilience;
+  /**
+  * Bounce-back ability (0-100)
+  *
+  * @var int $resilience
+ */
+  #[Required]
+  public int $resilience;
 
-    /**
-     * Willingness to be vulnerable (0-100).
-     */
-    #[Required]
-    public int $vulnerability;
+  /**
+  * Willingness to be vulnerable (0-100)
+  *
+  * @var int $vulnerability
+ */
+  #[Required]
+  public int $vulnerability;
 
-    /**
-     * `new EmotionalStats()` is missing required properties by the API.
-     *
-     * To enforce required parameters use
-     * ```
-     * EmotionalStats::with(
-     *   curiosity: ...,
-     *   empathy: ...,
-     *   optimism: ...,
-     *   resilience: ...,
-     *   vulnerability: ...,
-     * )
-     * ```
-     *
-     * Otherwise ensure the following setters are called
-     *
-     * ```
-     * (new EmotionalStats)
-     *   ->withCuriosity(...)
-     *   ->withEmpathy(...)
-     *   ->withOptimism(...)
-     *   ->withResilience(...)
-     *   ->withVulnerability(...)
-     * ```
-     */
-    public function __construct()
-    {
-        $this->initialize();
-    }
+  /**
+  * `new EmotionalStats()` is missing required properties by the API.
+  *
+  * To enforce required parameters use
+  * ```
+  * EmotionalStats::with(
+  *   curiosity: ...,
+  *   empathy: ...,
+  *   optimism: ...,
+  *   resilience: ...,
+  *   vulnerability: ...,
+  * )
+  * ```
+  *
+  * Otherwise ensure the following setters are called
+  *
+  * ```
+  * (new EmotionalStats)
+  *   ->withCuriosity(...)
+  *   ->withEmpathy(...)
+  *   ->withOptimism(...)
+  *   ->withResilience(...)
+  *   ->withVulnerability(...)
+  * ```
+ */
+  public function __construct() {$this->initialize();}
 
-    /**
-     * Construct an instance from the required parameters.
-     *
-     * You must use named parameters to construct any parameters with a default value.
-     */
-    public static function with(
-        int $curiosity,
-        int $empathy,
-        int $optimism,
-        int $resilience,
-        int $vulnerability,
-    ): self {
-        $self = new self;
+  /**
+  * Construct an instance from the required parameters.
+  *
+  * You must use named parameters to construct any parameters with a default value.
+  *
+  * @param int $curiosity
+  * @param int $empathy
+  * @param int $optimism
+  * @param int $resilience
+  * @param int $vulnerability
+  *
+  * @return self
+ */
+  public static function with(
+    int $curiosity,
+    int $empathy,
+    int $optimism,
+    int $resilience,
+    int $vulnerability,
+  ): self {
+    $self = new self;
 
-        $self['curiosity'] = $curiosity;
-        $self['empathy'] = $empathy;
-        $self['optimism'] = $optimism;
-        $self['resilience'] = $resilience;
-        $self['vulnerability'] = $vulnerability;
+    $self['curiosity'] = $curiosity;
+    $self['empathy'] = $empathy;
+    $self['optimism'] = $optimism;
+    $self['resilience'] = $resilience;
+    $self['vulnerability'] = $vulnerability;
 
-        return $self;
-    }
+    return $self;
+  }
 
-    /**
-     * Level of curiosity over judgment (0-100).
-     */
-    public function withCuriosity(int $curiosity): self
-    {
-        $self = clone $this;
-        $self['curiosity'] = $curiosity;
+  /**
+  * Level of curiosity over judgment (0-100)
+  *
+  * @param int $curiosity
+  *
+  * @return self
+ */
+  public function withCuriosity(int $curiosity): self {
+    $self = clone $this;
+    $self['curiosity'] = $curiosity;
+    return $self;
+  }
 
-        return $self;
-    }
+  /**
+  * Capacity for empathy (0-100)
+  *
+  * @param int $empathy
+  *
+  * @return self
+ */
+  public function withEmpathy(int $empathy): self {
+    $self = clone $this;
+    $self['empathy'] = $empathy;
+    return $self;
+  }
 
-    /**
-     * Capacity for empathy (0-100).
-     */
-    public function withEmpathy(int $empathy): self
-    {
-        $self = clone $this;
-        $self['empathy'] = $empathy;
+  /**
+  * Level of optimism (0-100)
+  *
+  * @param int $optimism
+  *
+  * @return self
+ */
+  public function withOptimism(int $optimism): self {
+    $self = clone $this;
+    $self['optimism'] = $optimism;
+    return $self;
+  }
 
-        return $self;
-    }
+  /**
+  * Bounce-back ability (0-100)
+  *
+  * @param int $resilience
+  *
+  * @return self
+ */
+  public function withResilience(int $resilience): self {
+    $self = clone $this;
+    $self['resilience'] = $resilience;
+    return $self;
+  }
 
-    /**
-     * Level of optimism (0-100).
-     */
-    public function withOptimism(int $optimism): self
-    {
-        $self = clone $this;
-        $self['optimism'] = $optimism;
-
-        return $self;
-    }
-
-    /**
-     * Bounce-back ability (0-100).
-     */
-    public function withResilience(int $resilience): self
-    {
-        $self = clone $this;
-        $self['resilience'] = $resilience;
-
-        return $self;
-    }
-
-    /**
-     * Willingness to be vulnerable (0-100).
-     */
-    public function withVulnerability(int $vulnerability): self
-    {
-        $self = clone $this;
-        $self['vulnerability'] = $vulnerability;
-
-        return $self;
-    }
+  /**
+  * Willingness to be vulnerable (0-100)
+  *
+  * @param int $vulnerability
+  *
+  * @return self
+ */
+  public function withVulnerability(int $vulnerability): self {
+    $self = clone $this;
+    $self['vulnerability'] = $vulnerability;
+    return $self;
+  }
 }

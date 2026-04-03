@@ -25,6 +25,13 @@ trait SdkPage
     private Client $client;
 
     /**
+     * @internal
+     *
+     * @return array{NormalizedRequest, RequestOptions}
+     */
+    abstract protected function nextRequest(): ?array;
+
+    /**
      * @return list<Item>
      */
     abstract public function getItems(): array;
@@ -92,11 +99,4 @@ trait SdkPage
             }
         }
     }
-
-    /**
-     * @internal
-     *
-     * @return array{NormalizedRequest, RequestOptions}
-     */
-    abstract protected function nextRequest(): ?array;
 }

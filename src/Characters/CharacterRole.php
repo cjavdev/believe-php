@@ -5,10 +5,12 @@ declare(strict_types=1);
 namespace Believe\Characters;
 
 /**
- * Roles characters can have.
+  * Roles characters can have.
+  *
  */
-enum CharacterRole: string
+enum CharacterRole : string
 {
+
     case COACH = 'coach';
 
     case PLAYER = 'player';
@@ -28,4 +30,5 @@ enum CharacterRole: string
     case FAN = 'fan';
 
     case OTHER = 'other';
+
 }

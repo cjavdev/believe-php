@@ -5,10 +5,12 @@ declare(strict_types=1);
 namespace Believe\Matches;
 
 /**
- * Types of matches.
+  * Types of matches.
+  *
  */
-enum MatchType: string
+enum MatchType : string
 {
+
     case LEAGUE = 'league';
 
     case CUP = 'cup';
@@ -18,4 +20,5 @@ enum MatchType: string
     case PLAYOFF = 'playoff';
 
     case FINAL = 'final';
+
 }

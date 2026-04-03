@@ -10,118 +10,133 @@ use Believe\Core\Contracts\BaseModel;
 use Believe\TeamMembers\CoachSpecialty;
 
 /**
- * Update model for coaches.
- *
- * @phpstan-type CoachUpdateShape = array{
- *   certifications?: list<string>|null,
- *   specialty?: null|CoachSpecialty|value-of<CoachSpecialty>,
- *   teamID?: string|null,
- *   winRate?: float|null,
- *   yearsWithTeam?: int|null,
- * }
+  * Update model for coaches.
+  *
+  * @phpstan-type CoachUpdateShape = array{
+  *   certifications?: list<string>|null,
+  *   specialty?: null|CoachSpecialty|value-of<CoachSpecialty>,
+  *   teamID?: string|null,
+  *   winRate?: float|null,
+  *   yearsWithTeam?: int|null,
+  * }
+  *
  */
 final class CoachUpdate implements BaseModel
 {
-    /** @use SdkModel<CoachUpdateShape> */
-    use SdkModel;
+  /** @use SdkModel<CoachUpdateShape> */
+  use SdkModel;
 
-    /** @var list<string>|null $certifications */
-    #[Optional(list: 'string', nullable: true)]
-    public ?array $certifications;
+  /** @var list<string>|null $certifications */
+  #[Optional(list: 'string', nullable: true)]
+  public ?array $certifications;
 
-    /**
-     * Coaching specialties.
-     *
-     * @var value-of<CoachSpecialty>|null $specialty
-     */
-    #[Optional(enum: CoachSpecialty::class, nullable: true)]
-    public ?string $specialty;
+  /**
+  * Coaching specialties.
+  *
+  * @var value-of<CoachSpecialty>|null $specialty
+ */
+  #[Optional(enum: CoachSpecialty::class, nullable: true)]
+  public ?string $specialty;
 
-    #[Optional('team_id', nullable: true)]
-    public ?string $teamID;
+  /** @var string|null $teamID */
+  #[Optional('team_id', nullable: true)]
+  public ?string $teamID;
 
-    #[Optional('win_rate', nullable: true)]
-    public ?float $winRate;
+  /** @var float|null $winRate */
+  #[Optional('win_rate', nullable: true)]
+  public ?float $winRate;
 
-    #[Optional('years_with_team', nullable: true)]
-    public ?int $yearsWithTeam;
+  /** @var int|null $yearsWithTeam */
+  #[Optional('years_with_team', nullable: true)]
+  public ?int $yearsWithTeam;
 
-    public function __construct()
-    {
-        $this->initialize();
-    }
+  public function __construct() {$this->initialize();}
 
-    /**
-     * Construct an instance from the required parameters.
-     *
-     * You must use named parameters to construct any parameters with a default value.
-     *
-     * @param list<string>|null $certifications
-     * @param CoachSpecialty|value-of<CoachSpecialty>|null $specialty
-     */
-    public static function with(
-        ?array $certifications = null,
-        CoachSpecialty|string|null $specialty = null,
-        ?string $teamID = null,
-        ?float $winRate = null,
-        ?int $yearsWithTeam = null,
-    ): self {
-        $self = new self;
+  /**
+  * Construct an instance from the required parameters.
+  *
+  * You must use named parameters to construct any parameters with a default value.
+  *
+  * @param list<string>|null $certifications
+  * @param null|CoachSpecialty|value-of<CoachSpecialty> $specialty
+  * @param string|null $teamID
+  * @param float|null $winRate
+  * @param int|null $yearsWithTeam
+  *
+  * @return self
+ */
+  public static function with(
+    ?array $certifications = null,
+    null|CoachSpecialty|string $specialty = null,
+    ?string $teamID = null,
+    ?float $winRate = null,
+    ?int $yearsWithTeam = null,
+  ): self {
+    $self = new self;
 
-        null !== $certifications && $self['certifications'] = $certifications;
-        null !== $specialty && $self['specialty'] = $specialty;
-        null !== $teamID && $self['teamID'] = $teamID;
-        null !== $winRate && $self['winRate'] = $winRate;
-        null !== $yearsWithTeam && $self['yearsWithTeam'] = $yearsWithTeam;
+    null !== $certifications && $self['certifications'] = $certifications;
+    null !== $specialty && $self['specialty'] = $specialty;
+    null !== $teamID && $self['teamID'] = $teamID;
+    null !== $winRate && $self['winRate'] = $winRate;
+    null !== $yearsWithTeam && $self['yearsWithTeam'] = $yearsWithTeam;
 
-        return $self;
-    }
+    return $self;
+  }
 
-    /**
-     * @param list<string>|null $certifications
-     */
-    public function withCertifications(?array $certifications): self
-    {
-        $self = clone $this;
-        $self['certifications'] = $certifications;
+  /**
+  * @param list<string>|null $certifications
+  *
+  * @return self
+ */
+  public function withCertifications(?array $certifications): self {
+    $self = clone $this;
+    $self['certifications'] = $certifications;
+    return $self;
+  }
 
-        return $self;
-    }
+  /**
+  * Coaching specialties.
+  *
+  * @param null|CoachSpecialty|value-of<CoachSpecialty> $specialty
+  *
+  * @return self
+ */
+  public function withSpecialty(null|CoachSpecialty|string $specialty): self {
+    $self = clone $this;
+    $self['specialty'] = $specialty;
+    return $self;
+  }
 
-    /**
-     * Coaching specialties.
-     *
-     * @param CoachSpecialty|value-of<CoachSpecialty>|null $specialty
-     */
-    public function withSpecialty(CoachSpecialty|string|null $specialty): self
-    {
-        $self = clone $this;
-        $self['specialty'] = $specialty;
+  /**
+  * @param string|null $teamID
+  *
+  * @return self
+ */
+  public function withTeamID(?string $teamID): self {
+    $self = clone $this;
+    $self['teamID'] = $teamID;
+    return $self;
+  }
 
-        return $self;
-    }
+  /**
+  * @param float|null $winRate
+  *
+  * @return self
+ */
+  public function withWinRate(?float $winRate): self {
+    $self = clone $this;
+    $self['winRate'] = $winRate;
+    return $self;
+  }
 
-    public function withTeamID(?string $teamID): self
-    {
-        $self = clone $this;
-        $self['teamID'] = $teamID;
-
-        return $self;
-    }
-
-    public function withWinRate(?float $winRate): self
-    {
-        $self = clone $this;
-        $self['winRate'] = $winRate;
-
-        return $self;
-    }
-
-    public function withYearsWithTeam(?int $yearsWithTeam): self
-    {
-        $self = clone $this;
-        $self['yearsWithTeam'] = $yearsWithTeam;
-
-        return $self;
-    }
+  /**
+  * @param int|null $yearsWithTeam
+  *
+  * @return self
+ */
+  public function withYearsWithTeam(?int $yearsWithTeam): self {
+    $self = clone $this;
+    $self['yearsWithTeam'] = $yearsWithTeam;
+    return $self;
+  }
 }

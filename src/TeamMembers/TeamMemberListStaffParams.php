@@ -5,99 +5,112 @@ declare(strict_types=1);
 namespace Believe\TeamMembers;
 
 use Believe\Core\Attributes\Optional;
-use Believe\Core\Concerns\SdkModel;
 use Believe\Core\Concerns\SdkParams;
+use Believe\Core\Concerns\SdkModel;
 use Believe\Core\Contracts\BaseModel;
 
 /**
- * Get all staff members (medical staff and equipment managers).
- *
- * This demonstrates a **narrower union type** - the response is oneOf MedicalStaff or EquipmentManager.
- *
- * @see Believe\Services\TeamMembersService::listStaff()
- *
- * @phpstan-type TeamMemberListStaffParamsShape = array{
- *   limit?: int|null, skip?: int|null, teamID?: string|null
- * }
+  * Get all staff members (medical staff and equipment managers).
+  *
+  * This demonstrates a **narrower union type** - the response is oneOf MedicalStaff or EquipmentManager.
+  * @see Believe\Services\TeamMembersService::listStaff()
+  *
+  * @phpstan-type TeamMemberListStaffParamsShape = array{
+  *   limit?: int|null, skip?: int|null, teamID?: string|null
+  * }
+  *
  */
 final class TeamMemberListStaffParams implements BaseModel
 {
-    /** @use SdkModel<TeamMemberListStaffParamsShape> */
-    use SdkModel;
-    use SdkParams;
+  /** @use SdkModel<TeamMemberListStaffParamsShape> */
+  use SdkModel;
+  use SdkParams;
 
-    /**
-     * Maximum number of items to return (max: 100).
-     */
-    #[Optional]
-    public ?int $limit;
+  /**
+  * Maximum number of items to return (max: 100)
+  *
+  * @var int|null $limit
+ */
+  #[Optional]
+  public ?int $limit;
 
-    /**
-     * Number of items to skip (offset).
-     */
-    #[Optional]
-    public ?int $skip;
+  /**
+  * Number of items to skip (offset)
+  *
+  * @var int|null $skip
+ */
+  #[Optional]
+  public ?int $skip;
 
-    /**
-     * Filter by team ID.
-     */
-    #[Optional(nullable: true)]
-    public ?string $teamID;
+  /**
+  * Filter by team ID
+  *
+  * @var string|null $teamID
+ */
+  #[Optional(nullable: true)]
+  public ?string $teamID;
 
-    public function __construct()
-    {
-        $this->initialize();
-    }
+  public function __construct() {$this->initialize();}
 
-    /**
-     * Construct an instance from the required parameters.
-     *
-     * You must use named parameters to construct any parameters with a default value.
-     */
-    public static function with(
-        ?int $limit = null,
-        ?int $skip = null,
-        ?string $teamID = null
-    ): self {
-        $self = new self;
+  /**
+  * Construct an instance from the required parameters.
+  *
+  * You must use named parameters to construct any parameters with a default value.
+  *
+  * @param int|null $limit
+  * @param int|null $skip
+  * @param string|null $teamID
+  *
+  * @return self
+ */
+  public static function with(
+    int $limit = null, int $skip = null, ?string $teamID = null
+  ): self {
+    $self = new self;
 
-        null !== $limit && $self['limit'] = $limit;
-        null !== $skip && $self['skip'] = $skip;
-        null !== $teamID && $self['teamID'] = $teamID;
+    null !== $limit && $self['limit'] = $limit;
+    null !== $skip && $self['skip'] = $skip;
+    null !== $teamID && $self['teamID'] = $teamID;
 
-        return $self;
-    }
+    return $self;
+  }
 
-    /**
-     * Maximum number of items to return (max: 100).
-     */
-    public function withLimit(int $limit): self
-    {
-        $self = clone $this;
-        $self['limit'] = $limit;
+  /**
+  * Maximum number of items to return (max: 100)
+  *
+  * @param int $limit
+  *
+  * @return self
+ */
+  public function withLimit(int $limit): self {
+    $self = clone $this;
+    $self['limit'] = $limit;
+    return $self;
+  }
 
-        return $self;
-    }
+  /**
+  * Number of items to skip (offset)
+  *
+  * @param int $skip
+  *
+  * @return self
+ */
+  public function withSkip(int $skip): self {
+    $self = clone $this;
+    $self['skip'] = $skip;
+    return $self;
+  }
 
-    /**
-     * Number of items to skip (offset).
-     */
-    public function withSkip(int $skip): self
-    {
-        $self = clone $this;
-        $self['skip'] = $skip;
-
-        return $self;
-    }
-
-    /**
-     * Filter by team ID.
-     */
-    public function withTeamID(?string $teamID): self
-    {
-        $self = clone $this;
-        $self['teamID'] = $teamID;
-
-        return $self;
-    }
+  /**
+  * Filter by team ID
+  *
+  * @param string|null $teamID
+  *
+  * @return self
+ */
+  public function withTeamID(?string $teamID): self {
+    $self = clone $this;
+    $self['teamID'] = $teamID;
+    return $self;
+  }
 }

@@ -5,10 +5,12 @@ declare(strict_types=1);
 namespace Believe\Quotes;
 
 /**
- * Types of moments when quotes occur.
+  * Types of moments when quotes occur.
+  *
  */
-enum QuoteMoment: string
+enum QuoteMoment : string
 {
+
     case HALFTIME_SPEECH = 'halftime_speech';
 
     case PRESS_CONFERENCE = 'press_conference';
@@ -30,4 +32,5 @@ enum QuoteMoment: string
     case CASUAL = 'casual';
 
     case CONFRONTATION = 'confrontation';
+
 }
