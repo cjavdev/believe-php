@@ -5,10 +5,12 @@ declare(strict_types=1);
 namespace Believe\TicketSales;
 
 /**
- * How the ticket was purchased.
+  * How the ticket was purchased.
+  *
  */
-enum PurchaseMethod: string
+enum PurchaseMethod : string
 {
+
     case ONLINE = 'online';
 
     case BOX_OFFICE = 'box_office';
@@ -16,4 +18,5 @@ enum PurchaseMethod: string
     case WILL_CALL = 'will_call';
 
     case PHONE = 'phone';
+
 }

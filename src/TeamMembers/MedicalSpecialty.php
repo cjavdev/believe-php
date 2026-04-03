@@ -5,10 +5,12 @@ declare(strict_types=1);
 namespace Believe\TeamMembers;
 
 /**
- * Medical staff specialties.
+  * Medical staff specialties.
+  *
  */
-enum MedicalSpecialty: string
+enum MedicalSpecialty : string
 {
+
     case TEAM_DOCTOR = 'team_doctor';
 
     case PHYSIOTHERAPIST = 'physiotherapist';
@@ -18,4 +20,5 @@ enum MedicalSpecialty: string
     case NUTRITIONIST = 'nutritionist';
 
     case MASSAGE_THERAPIST = 'massage_therapist';
+
 }

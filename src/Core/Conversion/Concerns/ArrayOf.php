@@ -15,12 +15,12 @@ use Believe\Core\Conversion\DumpState;
  */
 trait ArrayOf
 {
-    private readonly Converter|ConverterSource|string|null $type;
+    private readonly null|Converter|ConverterSource|string $type;
 
     public function __construct(
-        Converter|ConverterSource|string|null $type = null,
-        Converter|ConverterSource|string|null $enum = null,
-        Converter|ConverterSource|string|null $union = null,
+        null|Converter|ConverterSource|string $type = null,
+        null|Converter|ConverterSource|string $enum = null,
+        null|Converter|ConverterSource|string $union = null,
         private readonly bool $nullable = false,
     ) {
         $this->type = $type ?? $enum ?? $union;

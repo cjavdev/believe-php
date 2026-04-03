@@ -4,22 +4,26 @@ declare(strict_types=1);
 
 namespace Believe\ServiceContracts;
 
-use Believe\Core\Exceptions\APIException;
 use Believe\RequestOptions;
+use Believe\Core\Exceptions\APIException;
 
 /**
- * @phpstan-import-type RequestOpts from \Believe\RequestOptions
+  * @phpstan-import-type RequestOpts from \Believe\RequestOptions
+  *
  */
-interface HealthContract
-{
+interface HealthContract{
+
     /**
-     * @api
-     *
-     * @param RequestOpts|null $requestOptions
-     *
-     * @throws APIException
-     */
+  * @api
+  *
+  * @param RequestOpts|null $requestOptions
+  *
+  * @return mixed
+  *
+  * @throws APIException
+ */
     public function check(
-        RequestOptions|array|null $requestOptions = null
+      null|RequestOptions|array $requestOptions = null
     ): mixed;
+
 }

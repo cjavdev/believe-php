@@ -5,10 +5,12 @@ declare(strict_types=1);
 namespace Believe\TeamMembers;
 
 /**
- * Coaching specialties.
+  * Coaching specialties.
+  *
  */
-enum CoachSpecialty: string
+enum CoachSpecialty : string
 {
+
     case HEAD_COACH = 'head_coach';
 
     case ASSISTANT_COACH = 'assistant_coach';
@@ -18,4 +20,5 @@ enum CoachSpecialty: string
     case FITNESS_COACH = 'fitness_coach';
 
     case TACTICAL_ANALYST = 'tactical_analyst';
+
 }

@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Believe\Core\Conversion;
 
-use Believe\Core\Attributes\Optional;
 use Believe\Core\Attributes\Required;
+use Believe\Core\Attributes\Optional;
 use Believe\Core\Contracts\BaseModel;
 use Believe\Core\Conversion;
 use Believe\Core\Conversion\Contracts\Converter;
@@ -119,7 +119,6 @@ final class ModelOf implements Converter
         }
 
         ++$state->no;
-
         return Conversion::dump_unknown($value, state: $state);
     }
 

@@ -4,25 +4,27 @@ declare(strict_types=1);
 
 namespace Believe\ServiceContracts\Client;
 
+use Believe\RequestOptions;
 use Believe\Core\Contracts\BaseResponse;
 use Believe\Core\Exceptions\APIException;
-use Believe\RequestOptions;
 
 /**
- * @phpstan-import-type RequestOpts from \Believe\RequestOptions
+  * @phpstan-import-type RequestOpts from \Believe\RequestOptions
+  *
  */
-interface WsRawContract
-{
+interface WsRawContract{
+
     /**
-     * @api
-     *
-     * @param RequestOpts|null $requestOptions
-     *
-     * @return BaseResponse<mixed>
-     *
-     * @throws APIException
-     */
+  * @api
+  *
+  * @param RequestOpts|null $requestOptions
+  *
+  * @return BaseResponse<mixed>
+  *
+  * @throws APIException
+ */
     public function test(
-        RequestOptions|array|null $requestOptions = null
+      null|RequestOptions|array $requestOptions = null
     ): BaseResponse;
+
 }

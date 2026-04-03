@@ -8,24 +8,33 @@ use Believe\Client;
 use Believe\ServiceContracts\ClientContract;
 use Believe\Services\Client\WsService;
 
+/**
+  *
+  *
+ */
 final class ClientService implements ClientContract
 {
-    /**
-     * @api
-     */
-    public ClientRawService $raw;
+  /**
+  * @api
+  *
+  * @var ClientRawService $raw
+ */
+  public ClientRawService $raw;
 
-    /**
-     * @api
-     */
-    public WsService $ws;
+  /**
+  * @api
+  *
+  * @var WsService $ws
+ */
+  public WsService $ws;
 
-    /**
-     * @internal
-     */
-    public function __construct(private Client $client)
-    {
-        $this->raw = new ClientRawService($client);
-        $this->ws = new WsService($client);
-    }
+  /**
+  * @internal
+  *
+  * @param Client $client
+ */
+  function __construct(protected Client $client) {
+    $this->raw = new ClientRawService($client);
+    $this->ws = new WsService($client);
+  }
 }

@@ -73,9 +73,11 @@ trait SdkModel
      *
      * Magic get is intended to occur when we have manually unset
      * a native class property, indicating an omitted value,
-     * or a property overridden with an incongruent type
+     * or a property overridden with an incongruent type.
      *
      * @throws \Exception
+     *
+     * @return mixed
      */
     public function __get(string $key): mixed
     {
@@ -117,7 +119,7 @@ trait SdkModel
     {
         // @phpstan-ignore-next-line function.alreadyNarrowedType
         if (!is_string($offset)) {
-            throw new \InvalidArgumentException;
+            throw new \InvalidArgumentException();
         }
 
         if (array_key_exists($offset, array: $this->_data)) {
@@ -146,7 +148,7 @@ trait SdkModel
     {
         // @phpstan-ignore-next-line function.alreadyNarrowedType
         if (!is_string($offset)) {
-            throw new \InvalidArgumentException;
+            throw new \InvalidArgumentException();
         }
 
         // @phpstan-ignore-next-line function.alreadyNarrowedType
@@ -173,7 +175,7 @@ trait SdkModel
     {
         // @phpstan-ignore-next-line function.alreadyNarrowedType
         if (!is_string($offset)) {
-            throw new \InvalidArgumentException;
+            throw new \InvalidArgumentException();
         }
 
         $type = array_key_exists($offset, array: self::$converter->properties)
@@ -208,7 +210,7 @@ trait SdkModel
     {
         // @phpstan-ignore-next-line function.alreadyNarrowedType
         if (!is_string($offset)) {
-            throw new \InvalidArgumentException;
+            throw new \InvalidArgumentException();
         }
 
         // @phpstan-ignore-next-line function.alreadyNarrowedType

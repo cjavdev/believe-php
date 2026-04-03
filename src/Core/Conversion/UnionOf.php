@@ -20,7 +20,8 @@ final class UnionOf implements Converter
     public function __construct(
         private readonly array $variants,
         private readonly ?string $discriminator = null,
-    ) {}
+    ) {
+    }
 
     public function coerce(mixed $value, CoerceState $state): mixed
     {
@@ -31,7 +32,7 @@ final class UnionOf implements Converter
         $alternatives = [];
         foreach ($this->variants as $_ => $variant) {
             ++$state->branched;
-            $newState = new CoerceState;
+            $newState = new CoerceState();
 
             $coerced = Conversion::coerce($variant, value: $value, state: $newState);
             if (($newState->no + $newState->maybe) === 0) {
@@ -76,7 +77,7 @@ final class UnionOf implements Converter
                 return Conversion::dump($variant, value: $value, state: $state);
             }
 
-            $newState = new DumpState;
+            $newState = new DumpState();
             $dumped = Conversion::dump($variant, value: $value, state: $newState);
             if (($newState->no + $newState->maybe) === 0) {
                 $state->yes += $newState->yes;
@@ -109,15 +110,15 @@ final class UnionOf implements Converter
 
     private function resolveVariant(
         mixed $value,
-    ): Converter|ConverterSource|string|null {
+    ): null|Converter|ConverterSource|string {
         if ($value instanceof BaseModel) {
             return $value::class;
         }
 
         if (
-            null !== $this->discriminator
-            && is_array($value)
-            && array_key_exists($this->discriminator, array: $value)
+            null !== $this->discriminator &&
+            is_array($value) &&
+            array_key_exists($this->discriminator, array: $value)
         ) {
             $discriminator = $value[$this->discriminator];
             if (!is_string($discriminator)) {

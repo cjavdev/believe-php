@@ -5,10 +5,12 @@ declare(strict_types=1);
 namespace Believe\Webhooks\WebhookTriggerEventParams\Payload\MatchCompletedPayload\Data;
 
 /**
- * Type of match.
+  * Type of match
+  *
  */
-enum MatchType: string
+enum MatchType : string
 {
+
     case LEAGUE = 'league';
 
     case CUP = 'cup';
@@ -18,4 +20,5 @@ enum MatchType: string
     case PLAYOFF = 'playoff';
 
     case FINAL = 'final';
+
 }

@@ -5,9 +5,12 @@ declare(strict_types=1);
 namespace Believe\TeamMembers\TeamMemberCreateParams\Member\PlayerBase;
 
 /**
- * Discriminator field indicating this is a player.
+  * Discriminator field indicating this is a player
+  *
  */
-enum MemberType: string
+enum MemberType : string
 {
+
     case PLAYER = 'player';
+
 }

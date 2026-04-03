@@ -5,10 +5,12 @@ declare(strict_types=1);
 namespace Believe\Biscuits\Biscuit;
 
 /**
- * Type of biscuit.
+  * Type of biscuit
+  *
  */
-enum Type: string
+enum Type : string
 {
+
     case CLASSIC = 'classic';
 
     case SHORTBREAD = 'shortbread';
@@ -20,4 +22,5 @@ enum Type: string
     case SNICKERDOODLE = 'snickerdoodle';
 
     case LEMON_DRIZZLE = 'lemon_drizzle';
+
 }

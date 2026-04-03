@@ -14,19 +14,19 @@ use Believe\Core\Conversion\Contracts\ConverterSource;
 final class Optional extends Required
 {
     /**
-     * @param class-string<ConverterSource>|Converter|string|null $type
-     * @param class-string<\BackedEnum>|Converter|null            $enum
-     * @param class-string<ConverterSource>|Converter|null        $union
-     * @param class-string<ConverterSource>|Converter|string|null $list
-     * @param class-string<ConverterSource>|Converter|string|null $map
+     * @param null|class-string<ConverterSource>|Converter|string $type
+     * @param null|class-string<\BackedEnum>|Converter            $enum
+     * @param null|class-string<ConverterSource>|Converter        $union
+     * @param null|class-string<ConverterSource>|Converter|string $list
+     * @param null|class-string<ConverterSource>|Converter|string $map
      */
     public function __construct(
         ?string $apiName = null,
-        Converter|string|null $type = null,
-        Converter|string|null $enum = null,
-        Converter|string|null $union = null,
-        Converter|string|null $list = null,
-        Converter|string|null $map = null,
+        null|Converter|string $type = null,
+        null|Converter|string $enum = null,
+        null|Converter|string $union = null,
+        null|Converter|string $list = null,
+        null|Converter|string $map = null,
         bool $nullable = false,
     ) {
         parent::__construct(apiName: $apiName, type: $type, enum: $enum, union: $union, list: $list, map: $map, nullable: $nullable);

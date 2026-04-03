@@ -5,10 +5,12 @@ declare(strict_types=1);
 namespace Believe\TeamMembers;
 
 /**
- * Football positions for players.
+  * Football positions for players.
+  *
  */
-enum Position: string
+enum Position : string
 {
+
     case GOALKEEPER = 'goalkeeper';
 
     case DEFENDER = 'defender';
@@ -16,4 +18,5 @@ enum Position: string
     case MIDFIELDER = 'midfielder';
 
     case FORWARD = 'forward';
+
 }
