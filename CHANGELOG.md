@@ -1,5 +1,22 @@
 # Changelog
 
+## 0.5.0 (2026-04-03)
+
+Full Changelog: [v0.4.0...v0.5.0](https://github.com/cjavdev/believe-php/compare/v0.4.0...v0.5.0)
+
+### Features
+
+* **api:** manual updates ([97f0c2f](https://github.com/cjavdev/believe-php/commit/97f0c2f67de864e46856efa925857a23b9bda619))
+* **api:** manual updates ([2e525a1](https://github.com/cjavdev/believe-php/commit/2e525a1dc67e75dee49b9b20959aa92c5db7e008))
+* **api:** manual updates ([f5d85c3](https://github.com/cjavdev/believe-php/commit/f5d85c35a4e8200a73b95f8046e1f1caeaa4722e))
+* **api:** manual updates ([0a89755](https://github.com/cjavdev/believe-php/commit/0a897559ce62080c6d73d6098bd535c83c29737e))
+* **api:** manual updates ([61858d4](https://github.com/cjavdev/believe-php/commit/61858d46adf5ee7be79d1b8ce38232c2b58fc3ab))
+
+
+### Chores
+
+* **internal:** tweak CI branches ([d8d8cb8](https://github.com/cjavdev/believe-php/commit/d8d8cb8a2cae3dbe6ed1a731ac301b5812397fa7))
+
 ## 0.4.0 (2026-03-12)
 
 Full Changelog: [v0.3.0...v0.4.0](https://github.com/cjavdev/believe-php/compare/v0.3.0...v0.4.0)
