@@ -5,10 +5,12 @@ declare(strict_types=1);
 namespace Believe\Believe\BelieveSubmitParams;
 
 /**
- * Type of situation.
+  * Type of situation
+  *
  */
-enum SituationType: string
+enum SituationType : string
 {
+
     case WORK_CHALLENGE = 'work_challenge';
 
     case PERSONAL_SETBACK = 'personal_setback';
@@ -24,4 +26,5 @@ enum SituationType: string
     case NEW_BEGINNING = 'new_beginning';
 
     case RELATIONSHIP = 'relationship';
+
 }

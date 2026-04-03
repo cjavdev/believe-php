@@ -6,50 +6,69 @@ use Believe\Core\Util;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
+/**
+  *
+  *
+ */
 class APIStatusException extends APIException
 {
-    /** @var string */
-    protected const DESC = 'Believe API Status Error';
+  /** @var string */
+  protected const DESC = 'Believe API Status Error';
 
-    public ?int $status;
+  /** @var int|null $status */
+  public ?int $status;
 
-    public function __construct(
-        public RequestInterface $request,
-        ResponseInterface $response,
-        ?\Throwable $previous = null,
-        string $message = '',
-    ) {
-        $this->response = $response;
-        $this->status = $response->getStatusCode();
+  /**
+  * @param RequestInterface $request
+  * @param ResponseInterface $response
+  * @param string $message
+  *
+  * @return self
+ */
+  public static function from(
+    RequestInterface $request, ResponseInterface $response, string $message = ''
+  ): self {
+    $status = $response->getStatusCode();
 
-        $summary = Util::prettyEncodeJson(['status' => $this->status, 'body' => Util::decodeJson($response->getBody())]);
+    $cls = match (true)
+    {
 
-        if ('' != $message) {
-            $summary .= $message.PHP_EOL.$summary;
-        }
+        $status === 400 => BadRequestException::class,
+        $status === 401 => AuthenticationException::class,
+        $status === 403 => PermissionDeniedException::class,
+        $status === 404 => NotFoundException::class,
+        $status === 409 => ConflictException::class,
+        $status === 422 => UnprocessableEntityException::class,
+        $status === 429 => RateLimitException::class,
+        $status >= 500 => InternalServerException::class,
+        default => APIStatusException::class
 
-        parent::__construct(request: $request, message: $summary, previous: $previous);
+    };
+
+    return new $cls(request: $request, response: $response, message: $message);
+  }
+
+  /**
+  * @param RequestInterface $request
+  * @param \Throwable|null $previous
+  * @param ResponseInterface $response
+  * @param string $message
+ */
+  function __construct(
+    public RequestInterface $request,
+    ResponseInterface $response,
+    ?\Throwable $previous = null,
+    string $message = '',
+  ) {
+    $this->response = $response;
+    $this->status = $response->getStatusCode();
+
+    $summary = Util::prettyEncodeJson(['status' => $this->status, 'body' => Util::decodeJson($response->getBody())]);
+
+    if ('' != $message) {
+        $summary .= $message . PHP_EOL . $summary;
     }
 
-    public static function from(
-        RequestInterface $request,
-        ResponseInterface $response,
-        string $message = ''
-    ): self {
-        $status = $response->getStatusCode();
-
-        $cls = match (true) {
-            400 === $status => BadRequestException::class,
-            401 === $status => AuthenticationException::class,
-            403 === $status => PermissionDeniedException::class,
-            404 === $status => NotFoundException::class,
-            409 === $status => ConflictException::class,
-            422 === $status => UnprocessableEntityException::class,
-            429 === $status => RateLimitException::class,
-            $status >= 500 => InternalServerException::class,
-            default => APIStatusException::class
-        };
-
-        return new $cls(request: $request, response: $response, message: $message);
-    }
+    parent::__construct(request: $request, message: $summary, previous: $previous);
+  }
 }

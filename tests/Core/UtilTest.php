@@ -2,17 +2,11 @@
 
 namespace Tests\Core;
 
-use Believe\Core\Util;
 use Http\Discovery\Psr17FactoryDiscovery;
-use PHPUnit\Framework\Attributes\CoversNothing;
-use PHPUnit\Framework\Attributes\Test;
+use Believe\Core\Util;
+use PHPUnit\Framework\Attributes\{Test,CoversNothing};
 use PHPUnit\Framework\TestCase;
 
-/**
- * @internal
- *
- * @coversNothing
- */
 #[CoversNothing]
 class UtilTest extends TestCase
 {
@@ -47,43 +41,43 @@ class UtilTest extends TestCase
     public function testJoinUri(): void
     {
         $factory = Psr17FactoryDiscovery::findUriFactory();
-        $base = $factory->createUri('http://localhost');
+        $base = $factory->createUri("http://localhost");
         $cases = [
             [
                 '',
                 [],
-                'http://localhost',
+                "http://localhost",
             ],
             [
                 'dog',
                 [],
-                'http://localhost/dog',
+                "http://localhost/dog",
             ],
             [
                 '',
                 ['dog' => 'dog'],
-                'http://localhost?dog=dog',
+                "http://localhost?dog=dog",
             ],
             [
                 '',
                 ['dog' => ['dog']],
-                'http://localhost?dog[0]=dog',
+                "http://localhost?dog[0]=dog",
             ],
             [
                 '',
                 ['dog' => [true, false]],
-                'http://localhost?dog[0]=true&dog[1]=false',
+                "http://localhost?dog[0]=true&dog[1]=false",
             ],
             [
                 '',
                 ['dog' => ['dog' => ['dog']]],
-                'http://localhost?dog[dog][0]=dog',
+                "http://localhost?dog[dog][0]=dog",
             ],
         ];
 
         foreach ($cases as [$path, $query, $output]) {
             $expected = $factory->createUri($output);
-            $actual = Util::joinUri($base, path: $path, query: $query);
+            $actual = Util::joinUri($base, path:$path, query: $query);
             $this->assertEquals($expected, $actual);
         }
     }

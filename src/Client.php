@@ -5,252 +5,301 @@ declare(strict_types=1);
 namespace Believe;
 
 use Believe\Core\BaseClient;
-use Believe\Core\Exceptions\APIException;
 use Believe\Core\Util;
-use Believe\Services\BelieveClientRawService;
-use Believe\Services\BelieveClientService;
-use Believe\Services\BelieveService;
-use Believe\Services\BiscuitsService;
+use Believe\Core\Exceptions\APIException;
 use Believe\Services\CharactersService;
-use Believe\Services\ClientService;
-use Believe\Services\CoachingService;
-use Believe\Services\ConflictsService;
-use Believe\Services\EpisodesService;
-use Believe\Services\HealthService;
+use Believe\Services\TeamsService;
 use Believe\Services\MatchesService;
-use Believe\Services\PepTalkService;
-use Believe\Services\PressService;
+use Believe\Services\EpisodesService;
 use Believe\Services\QuotesService;
+use Believe\Services\BelieveService;
+use Believe\Services\ConflictsService;
 use Believe\Services\ReframeService;
+use Believe\Services\PressService;
+use Believe\Services\CoachingService;
+use Believe\Services\BiscuitsService;
+use Believe\Services\PepTalkService;
 use Believe\Services\StreamService;
 use Believe\Services\TeamMembersService;
-use Believe\Services\TeamsService;
-use Believe\Services\TicketSalesService;
-use Believe\Services\VersionService;
 use Believe\Services\WebhooksService;
-use Http\Discovery\Psr17FactoryDiscovery;
+use Believe\Services\TicketSalesService;
+use Believe\Services\HealthService;
+use Believe\Services\VersionService;
+use Believe\Services\ClientService;
+use Believe\Services\BelieveClientRawService;
+use Believe\Services\BelieveClientService;
 use Http\Discovery\Psr18ClientDiscovery;
+use Http\Discovery\Psr17FactoryDiscovery;
 
 /**
- * @phpstan-import-type NormalizedRequest from \Believe\Core\BaseClient
- * @phpstan-import-type RequestOpts from \Believe\RequestOptions
+  * @phpstan-import-type NormalizedRequest from \Believe\Core\BaseClient
+  * @phpstan-import-type RequestOpts from \Believe\RequestOptions
+  *
  */
 class Client extends BaseClient
 {
-    public string $apiKey;
+  /** @var string $apiKey */
+  public string $apiKey;
 
-    /**
-     * @api
-     */
-    public CharactersService $characters;
+  /**
+  * @api
+  *
+  * @var CharactersService $characters
+ */
+  public CharactersService $characters;
 
-    /**
-     * @api
-     */
-    public TeamsService $teams;
+  /**
+  * @api
+  *
+  * @var TeamsService $teams
+ */
+  public TeamsService $teams;
 
-    /**
-     * @api
-     */
-    public MatchesService $matches;
+  /**
+  * @api
+  *
+  * @var MatchesService $matches
+ */
+  public MatchesService $matches;
 
-    /**
-     * @api
-     */
-    public EpisodesService $episodes;
+  /**
+  * @api
+  *
+  * @var EpisodesService $episodes
+ */
+  public EpisodesService $episodes;
 
-    /**
-     * @api
-     */
-    public QuotesService $quotes;
+  /**
+  * @api
+  *
+  * @var QuotesService $quotes
+ */
+  public QuotesService $quotes;
 
-    /**
-     * @api
-     */
-    public BelieveService $believe;
+  /**
+  * @api
+  *
+  * @var BelieveService $believe
+ */
+  public BelieveService $believe;
 
-    /**
-     * @api
-     */
-    public ConflictsService $conflicts;
+  /**
+  * @api
+  *
+  * @var ConflictsService $conflicts
+ */
+  public ConflictsService $conflicts;
 
-    /**
-     * @api
-     */
-    public ReframeService $reframe;
+  /**
+  * @api
+  *
+  * @var ReframeService $reframe
+ */
+  public ReframeService $reframe;
 
-    /**
-     * @api
-     */
-    public PressService $press;
+  /**
+  * @api
+  *
+  * @var PressService $press
+ */
+  public PressService $press;
 
-    /**
-     * @api
-     */
-    public CoachingService $coaching;
+  /**
+  * @api
+  *
+  * @var CoachingService $coaching
+ */
+  public CoachingService $coaching;
 
-    /**
-     * @api
-     */
-    public BiscuitsService $biscuits;
+  /**
+  * @api
+  *
+  * @var BiscuitsService $biscuits
+ */
+  public BiscuitsService $biscuits;
 
-    /**
-     * @api
-     */
-    public PepTalkService $pepTalk;
+  /**
+  * @api
+  *
+  * @var PepTalkService $pepTalk
+ */
+  public PepTalkService $pepTalk;
 
-    /**
-     * @api
-     */
-    public StreamService $stream;
+  /**
+  * @api
+  *
+  * @var StreamService $stream
+ */
+  public StreamService $stream;
 
-    /**
-     * @api
-     */
-    public TeamMembersService $teamMembers;
+  /**
+  * @api
+  *
+  * @var TeamMembersService $teamMembers
+ */
+  public TeamMembersService $teamMembers;
 
-    /**
-     * @api
-     */
-    public WebhooksService $webhooks;
+  /**
+  * @api
+  *
+  * @var WebhooksService $webhooks
+ */
+  public WebhooksService $webhooks;
 
-    /**
-     * @api
-     */
-    public TicketSalesService $ticketSales;
+  /**
+  * @api
+  *
+  * @var TicketSalesService $ticketSales
+ */
+  public TicketSalesService $ticketSales;
 
-    /**
-     * @api
-     */
-    public HealthService $health;
+  /**
+  * @api
+  *
+  * @var HealthService $health
+ */
+  public HealthService $health;
 
-    /**
-     * @api
-     */
-    public VersionService $version;
+  /**
+  * @api
+  *
+  * @var VersionService $version
+ */
+  public VersionService $version;
 
-    /**
-     * @api
-     */
-    public ClientService $client;
+  /**
+  * @api
+  *
+  * @var ClientService $client
+ */
+  public ClientService $client;
 
-    /**
-     * @api
-     */
-    public BelieveClientRawService $raw;
+  /**
+  * @api
+  *
+  * @var BelieveClientRawService $raw
+ */
+  public BelieveClientRawService $raw;
 
-    /**
-     * @api
-     */
-    private BelieveClientService $believeClientService;
+  /**
+  * @api
+  *
+  * @var BelieveClientService $believeClientService
+ */
+  private BelieveClientService $believeClientService;
 
-    /**
-     * @param RequestOpts|null $requestOptions
-     */
-    public function __construct(
-        ?string $apiKey = null,
-        ?string $baseUrl = null,
-        RequestOptions|array|null $requestOptions = null,
-    ) {
-        $this->apiKey = (string) ($apiKey ?? Util::getenv('BELIEVE_API_KEY'));
+  /** @return array<string,string> */
+  protected function authHeaders(): array {
+    return $this->apiKey ? ['Authorization' => "Bearer {$this->apiKey}"] : [];
+  }
 
-        $baseUrl ??= Util::getenv('BELIEVE_BASE_URL') ?: 'https://believe.cjav.dev';
+  /**
+  * @internal
+  *
+  * @param string $method
+  * @param string|list<string> $path
+  * @param array<string,mixed> $query
+  * @param array<string,string|int|null|list<string|int>> $headers
+  * @param mixed $body
+  * @param RequestOpts|null $opts
+  *
+  * @return array{NormalizedRequest, RequestOptions}
+ */
+  protected function buildRequest(
+    string $method,
+    string|array $path,
+    array $query,
+    array $headers,
+    mixed $body,
+    null|RequestOptions|array $opts,
+  ): array {
+    return parent::buildRequest(
+      method: $method,
+      path: $path,
+      query: $query,
+      headers: [...$this->authHeaders(), ...$headers],
+      body: $body,
+      opts: $opts,
+    );
+  }
 
-        $options = RequestOptions::parse(
-            RequestOptions::with(
-                uriFactory: Psr17FactoryDiscovery::findUriFactory(),
-                streamFactory: Psr17FactoryDiscovery::findStreamFactory(),
-                requestFactory: Psr17FactoryDiscovery::findRequestFactory(),
-                transporter: Psr18ClientDiscovery::find(),
-            ),
-            $requestOptions,
-        );
+  /**
+  * @param string|null $apiKey
+  * @param string|null $baseUrl
+  * @param RequestOpts|null $requestOptions
+ */
+  function __construct(
+    ?string $apiKey = NULL,
+    ?string $baseUrl = NULL,
+    null|RequestOptions|array $requestOptions = NULL,
+  ) {
+    $this->apiKey = (string)($apiKey ?? Util::getenv('BELIEVE_API_KEY'));
 
-        parent::__construct(
-            headers: [
-                'Content-Type' => 'application/json',
-                'Accept' => 'application/json',
-                'User-Agent' => sprintf('believe/PHP %s', VERSION),
-                'X-Stainless-Lang' => 'php',
-                'X-Stainless-Package-Version' => '0.0.1',
-                'X-Stainless-Arch' => Util::machtype(),
-                'X-Stainless-OS' => Util::ostype(),
-                'X-Stainless-Runtime' => php_sapi_name(),
-                'X-Stainless-Runtime-Version' => phpversion(),
-            ],
-            baseUrl: $baseUrl,
-            options: $options
-        );
+    $baseUrl ??= Util::getenv('BELIEVE_BASE_URL') ?: "https://believe.cjav.dev";
 
-        $this->characters = new CharactersService($this);
-        $this->teams = new TeamsService($this);
-        $this->matches = new MatchesService($this);
-        $this->episodes = new EpisodesService($this);
-        $this->quotes = new QuotesService($this);
-        $this->believe = new BelieveService($this);
-        $this->conflicts = new ConflictsService($this);
-        $this->reframe = new ReframeService($this);
-        $this->press = new PressService($this);
-        $this->coaching = new CoachingService($this);
-        $this->biscuits = new BiscuitsService($this);
-        $this->pepTalk = new PepTalkService($this);
-        $this->stream = new StreamService($this);
-        $this->teamMembers = new TeamMembersService($this);
-        $this->webhooks = new WebhooksService($this);
-        $this->ticketSales = new TicketSalesService($this);
-        $this->health = new HealthService($this);
-        $this->version = new VersionService($this);
-        $this->client = new ClientService($this);
-        $this->raw = new BelieveClientRawService($this);
-        $this->believeClientService = new BelieveClientService($this);
-    }
+    $options = RequestOptions::parse(
+        RequestOptions::with(
+            uriFactory: Psr17FactoryDiscovery::findUriFactory(),
+            streamFactory: Psr17FactoryDiscovery::findStreamFactory(),
+            requestFactory: Psr17FactoryDiscovery::findRequestFactory(),
+            transporter: Psr18ClientDiscovery::find(),
+        ),
+        $requestOptions,
+    );
 
-    /**
-     * @api
-     *
-     * Get a warm welcome and overview of available endpoints.
-     *
-     * @param RequestOpts|null $requestOptions
-     *
-     * @throws APIException
-     */
-    public function getWelcome(
-        RequestOptions|array|null $requestOptions = null
-    ): mixed {
-        return $this->believeClientService->getWelcome($requestOptions);
-    }
+    parent::__construct(
+      headers: [
+        'Content-Type' => 'application/json',
+        'Accept' => 'application/json',
+        'User-Agent' => sprintf('believe/PHP %s', VERSION),
+        'X-Stainless-Lang' => 'php',
+        'X-Stainless-Package-Version' => '0.0.1',
+        'X-Stainless-Arch' => Util::machtype(),
+        'X-Stainless-OS' => Util::ostype(),
+        'X-Stainless-Runtime' => php_sapi_name(),
+        'X-Stainless-Runtime-Version' => phpversion(),
+      ],
+      baseUrl: $baseUrl,
+      options: $options
+    );
 
-    /** @return array<string,string> */
-    protected function authHeaders(): array
-    {
-        return $this->apiKey ? ['Authorization' => "Bearer {$this->apiKey}"] : [];
-    }
+    $this->characters = new CharactersService($this);
+    $this->teams = new TeamsService($this);
+    $this->matches = new MatchesService($this);
+    $this->episodes = new EpisodesService($this);
+    $this->quotes = new QuotesService($this);
+    $this->believe = new BelieveService($this);
+    $this->conflicts = new ConflictsService($this);
+    $this->reframe = new ReframeService($this);
+    $this->press = new PressService($this);
+    $this->coaching = new CoachingService($this);
+    $this->biscuits = new BiscuitsService($this);
+    $this->pepTalk = new PepTalkService($this);
+    $this->stream = new StreamService($this);
+    $this->teamMembers = new TeamMembersService($this);
+    $this->webhooks = new WebhooksService($this);
+    $this->ticketSales = new TicketSalesService($this);
+    $this->health = new HealthService($this);
+    $this->version = new VersionService($this);
+    $this->client = new ClientService($this);
+    $this->raw = new BelieveClientRawService($this);
+    $this->believeClientService = new BelieveClientService($this);
+  }
 
-    /**
-     * @internal
-     *
-     * @param string|list<string> $path
-     * @param array<string,mixed> $query
-     * @param array<string,string|int|list<string|int>|null> $headers
-     * @param RequestOpts|null $opts
-     *
-     * @return array{NormalizedRequest, RequestOptions}
-     */
-    protected function buildRequest(
-        string $method,
-        string|array $path,
-        array $query,
-        array $headers,
-        mixed $body,
-        RequestOptions|array|null $opts,
-    ): array {
-        return parent::buildRequest(
-            method: $method,
-            path: $path,
-            query: $query,
-            headers: [...$this->authHeaders(), ...$headers],
-            body: $body,
-            opts: $opts,
-        );
-    }
+  /**
+  * @api
+  *
+  * Get a warm welcome and overview of available endpoints.
+  *
+  * @param RequestOpts|null $requestOptions
+  *
+  * @return mixed
+  *
+  * @throws APIException
+ */
+  public function getWelcome(
+    null|RequestOptions|array $requestOptions = null
+  ): mixed {
+    return $this->believeClientService->getWelcome($requestOptions);
+  }
 }

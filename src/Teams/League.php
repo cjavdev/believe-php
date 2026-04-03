@@ -5,10 +5,12 @@ declare(strict_types=1);
 namespace Believe\Teams;
 
 /**
- * Football leagues.
+  * Football leagues.
+  *
  */
-enum League: string
+enum League : string
 {
+
     case PREMIER_LEAGUE = 'Premier League';
 
     case CHAMPIONSHIP = 'Championship';
@@ -24,4 +26,5 @@ enum League: string
     case BUNDESLIGA = 'Bundesliga';
 
     case LIGUE_1 = 'Ligue 1';
+
 }

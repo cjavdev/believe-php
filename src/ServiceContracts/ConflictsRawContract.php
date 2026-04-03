@@ -4,29 +4,31 @@ declare(strict_types=1);
 
 namespace Believe\ServiceContracts;
 
-use Believe\Conflicts\ConflictResolveParams;
+use Believe\RequestOptions;
 use Believe\Conflicts\ConflictResolveResponse;
+use Believe\Conflicts\ConflictResolveParams;
 use Believe\Core\Contracts\BaseResponse;
 use Believe\Core\Exceptions\APIException;
-use Believe\RequestOptions;
 
 /**
- * @phpstan-import-type RequestOpts from \Believe\RequestOptions
+  * @phpstan-import-type RequestOpts from \Believe\RequestOptions
+  *
  */
-interface ConflictsRawContract
-{
+interface ConflictsRawContract{
+
     /**
-     * @api
-     *
-     * @param array<string,mixed>|ConflictResolveParams $params
-     * @param RequestOpts|null $requestOptions
-     *
-     * @return BaseResponse<ConflictResolveResponse>
-     *
-     * @throws APIException
-     */
+  * @api
+  *
+  * @param array<string,mixed>|ConflictResolveParams $params
+  * @param RequestOpts|null $requestOptions
+  *
+  * @return BaseResponse<ConflictResolveResponse>
+  *
+  * @throws APIException
+ */
     public function resolve(
-        array|ConflictResolveParams $params,
-        RequestOptions|array|null $requestOptions = null,
+      array|ConflictResolveParams $params,
+      null|RequestOptions|array $requestOptions = null,
     ): BaseResponse;
+
 }

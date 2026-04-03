@@ -2,16 +2,19 @@
 
 The Believe PHP library provides convenient access to the Believe REST API from any PHP 8.1.0+ application.
 
+
+
 It is generated with [Stainless](https://www.stainless.com/).
 
 ## Documentation
+
+
 
 ## Installation
 
 To use this package, install via Composer by adding the following to your application's `composer.json`:
 
 <!-- x-release-please-start-version -->
-
 ```json
 {
   "repositories": [
@@ -25,7 +28,6 @@ To use this package, install via Composer by adding the following to your applic
   }
 }
 ```
-
 <!-- x-release-please-end -->
 
 ## Usage
@@ -51,6 +53,8 @@ It is recommended to use the static `with` constructor `EmotionalStats::with(cur
 and named parameters to initialize value objects.
 
 However, builders are also provided `(new EmotionalStats)->withCuriosity(99)`.
+
+
 
 ### Pagination
 
@@ -169,7 +173,7 @@ If you want to explicitly send an extra param, you can do so with the `extra_que
 
 To make requests to undocumented endpoints while retaining the benefit of auth, retries, and so on, you can make requests using `client.request`, like so:
 
-```php
+~~~php
 <?php
 
 $response = $client->request(
@@ -179,7 +183,7 @@ $response = $client->request(
   headers: ['useful-header' => 'interesting-value'],
   body: ['hello' => 'world']
 );
-```
+~~~
 
 ## Versioning
 

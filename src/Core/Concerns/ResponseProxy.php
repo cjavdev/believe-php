@@ -20,7 +20,6 @@ trait ResponseProxy
     {
         $self = clone $this;
         $self->response = $this->response->withProtocolVersion($version);
-
         return $self;
     }
 
@@ -33,6 +32,7 @@ trait ResponseProxy
     {
         return $this->response->hasHeader($name);
     }
+
 
     public function getHeader(string $name): array
     {
@@ -48,7 +48,6 @@ trait ResponseProxy
     {
         $self = clone $this;
         $self->response = $this->response->withHeader($name, value: $value);
-
         return $self;
     }
 
@@ -56,7 +55,6 @@ trait ResponseProxy
     {
         $self = clone $this;
         $self->response = $this->response->withAddedHeader($name, value: $value);
-
         return $self;
     }
 
@@ -64,7 +62,6 @@ trait ResponseProxy
     {
         $self = clone $this;
         $self->response = $this->response->withoutHeader($name);
-
         return $self;
     }
 
@@ -77,7 +74,6 @@ trait ResponseProxy
     {
         $self = clone $this;
         $self->response = $this->response->withBody($body);
-
         return $self;
     }
 
@@ -90,7 +86,6 @@ trait ResponseProxy
     {
         $self = clone $this;
         $self->response = $this->response->withstatus($code, reasonPhrase: $reasonPhrase);
-
         return $self;
     }
 

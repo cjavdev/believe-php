@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Believe\Core\Conversion;
 
-use Believe\Core\Attributes\Optional;
 use Believe\Core\Attributes\Required;
+use Believe\Core\Attributes\Optional;
 use Believe\Core\Conversion\Contracts\Converter;
 use Believe\Core\Conversion\Contracts\ConverterSource;
 
@@ -48,9 +48,9 @@ final class PropertyInfo
     }
 
     /**
-     * @param array<int|string,string>|Converter|ConverterSource|\ReflectionType|string|null $type
+     * @param null|array<int|string,string>|Converter|ConverterSource|\ReflectionType|string $type
      */
-    private static function parse(array|Converter|ConverterSource|\ReflectionType|string|null $type): Converter|ConverterSource|string
+    private static function parse(null|array|Converter|ConverterSource|\ReflectionType|string $type): Converter|ConverterSource|string
     {
         if (is_string($type) || $type instanceof Converter) {
             return $type;
@@ -71,7 +71,7 @@ final class PropertyInfo
         }
 
         if ($type instanceof \ReflectionIntersectionType) {
-            throw new \ValueError;
+            throw new \ValueError();
         }
 
         return 'mixed';

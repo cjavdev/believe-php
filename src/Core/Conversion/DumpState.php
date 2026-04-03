@@ -16,5 +16,6 @@ final class DumpState
         public int $maybe = 0,
         public int $branched = 0,
         public bool $canRetry = true
-    ) {}
+    ) {
+    }
 }

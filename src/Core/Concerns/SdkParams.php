@@ -6,6 +6,7 @@ namespace Believe\Core\Concerns;
 
 use Believe\Core\Conversion;
 use Believe\Core\Conversion\DumpState;
+use Believe\Core\Util;
 use Believe\RequestOptions;
 
 /**
@@ -14,14 +15,14 @@ use Believe\RequestOptions;
 trait SdkParams
 {
     /**
-     * @param array<string, mixed>|RequestOptions|null $options
+     * @param null|array<string, mixed>|RequestOptions $options
      *
      * @return array{array<string, mixed>, RequestOptions}
      */
-    public static function parseRequest(mixed $params, array|RequestOptions|null $options): array
+    public static function parseRequest(mixed $params, null|array|RequestOptions $options): array
     {
         $converter = self::converter();
-        $state = new DumpState;
+        $state = new DumpState();
         $dumped = (array) Conversion::dump($converter, value: $params, state: $state);
         // @phpstan-ignore-next-line argument.type
         $opts = RequestOptions::parse($options);

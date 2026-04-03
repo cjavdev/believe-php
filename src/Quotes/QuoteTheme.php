@@ -5,10 +5,12 @@ declare(strict_types=1);
 namespace Believe\Quotes;
 
 /**
- * Themes that quotes can be categorized under.
+  * Themes that quotes can be categorized under.
+  *
  */
-enum QuoteTheme: string
+enum QuoteTheme : string
 {
+
     case BELIEF = 'belief';
 
     case TEAMWORK = 'teamwork';
@@ -70,4 +72,5 @@ enum QuoteTheme: string
     case NARCISSISM = 'narcissism';
 
     case MATURITY = 'maturity';
+
 }

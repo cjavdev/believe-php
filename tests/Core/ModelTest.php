@@ -2,12 +2,11 @@
 
 namespace Tests\Core;
 
-use Believe\Core\Attributes\Optional;
 use Believe\Core\Attributes\Required;
+use Believe\Core\Attributes\Optional;
 use Believe\Core\Concerns\SdkModel;
 use Believe\Core\Contracts\BaseModel;
-use PHPUnit\Framework\Attributes\CoversNothing;
-use PHPUnit\Framework\Attributes\Test;
+use PHPUnit\Framework\Attributes\{Test,CoversNothing};
 use PHPUnit\Framework\TestCase;
 
 class Dog implements BaseModel
@@ -87,7 +86,7 @@ class ModelTest extends TestCase
     public function testDiscernsBetweenNullAndUnset(): void
     {
         $modelUnsetFriends = new Dog(name: 'Bob', ageYears: 12, owner: null);
-        $modelNullFriends = new Dog(name: 'bob', ageYears: 12, owner: null);
+        $modelNullFriends = new Dog(name: 'bob', ageYears: 12, owner: null, );
         $modelNullFriends->friends = null;
 
         $this->assertEquals(12, $modelUnsetFriends->ageYears);

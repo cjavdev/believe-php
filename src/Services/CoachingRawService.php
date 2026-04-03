@@ -7,11 +7,17 @@ namespace Believe\Services;
 use Believe\Client;
 use Believe\ServiceContracts\CoachingRawContract;
 
+/**
+  *
+  *
+ */
 final class CoachingRawService implements CoachingRawContract
 {
-    // @phpstan-ignore-next-line
-    /**
-     * @internal
-     */
-    public function __construct(private Client $client) {}
+  // @phpstan-ignore-next-line
+  /**
+  * @internal
+  *
+  * @param Client $client
+ */
+  function __construct(protected Client $client) {}
 }
