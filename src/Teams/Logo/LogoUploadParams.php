@@ -8,13 +8,14 @@ use Believe\Core\Attributes\Required;
 use Believe\Core\Concerns\SdkModel;
 use Believe\Core\Concerns\SdkParams;
 use Believe\Core\Contracts\BaseModel;
+use Believe\Core\FileParam;
 
 /**
  * Upload a logo image for a team. Accepts image files (jpg, png, gif, webp).
  *
  * @see Believe\Services\Teams\LogoService::upload()
  *
- * @phpstan-type LogoUploadParamsShape = array{file: string}
+ * @phpstan-type LogoUploadParamsShape = array{file: string|FileParam}
  */
 final class LogoUploadParams implements BaseModel
 {
@@ -52,7 +53,7 @@ final class LogoUploadParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(string $file): self
+    public static function with(string|FileParam $file): self
     {
         $self = new self;
 
@@ -64,7 +65,7 @@ final class LogoUploadParams implements BaseModel
     /**
      * Logo image file.
      */
-    public function withFile(string $file): self
+    public function withFile(string|FileParam $file): self
     {
         $self = clone $this;
         $self['file'] = $file;
