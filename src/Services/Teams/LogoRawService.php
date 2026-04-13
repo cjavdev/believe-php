@@ -7,6 +7,7 @@ namespace Believe\Services\Teams;
 use Believe\Client;
 use Believe\Core\Contracts\BaseResponse;
 use Believe\Core\Exceptions\APIException;
+use Believe\Core\FileParam;
 use Believe\RequestOptions;
 use Believe\ServiceContracts\Teams\LogoRawContract;
 use Believe\Teams\Logo\FileUpload;
@@ -98,7 +99,7 @@ final class LogoRawService implements LogoRawContract
      *
      * Upload a logo image for a team. Accepts image files (jpg, png, gif, webp).
      *
-     * @param array{file: string}|LogoUploadParams $params
+     * @param array{file: string|FileParam}|LogoUploadParams $params
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<FileUpload>

@@ -6,6 +6,7 @@ namespace Believe\Services\Teams;
 
 use Believe\Client;
 use Believe\Core\Exceptions\APIException;
+use Believe\Core\FileParam;
 use Believe\Core\Util;
 use Believe\RequestOptions;
 use Believe\ServiceContracts\Teams\LogoContract;
@@ -80,14 +81,14 @@ final class LogoService implements LogoContract
      *
      * Upload a logo image for a team. Accepts image files (jpg, png, gif, webp).
      *
-     * @param string $file Logo image file
+     * @param string|FileParam $file Logo image file
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function upload(
         string $teamID,
-        string $file,
+        string|FileParam $file,
         RequestOptions|array|null $requestOptions = null,
     ): FileUpload {
         $params = Util::removeNulls(['file' => $file]);

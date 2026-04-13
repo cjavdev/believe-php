@@ -8,22 +8,10 @@ It is generated with [Stainless](https://www.stainless.com/).
 
 ## Installation
 
-To use this package, install via Composer by adding the following to your application's `composer.json`:
-
 <!-- x-release-please-start-version -->
 
-```json
-{
-  "repositories": [
-    {
-      "type": "vcs",
-      "url": "git@github.com:cjavdev/believe-php.git"
-    }
-  ],
-  "require": {
-    "org-placeholder/believe": "dev-main"
-  }
-}
+```
+composer require "org-placeholder/believe 0.6.0"
 ```
 
 <!-- x-release-please-end -->
@@ -137,6 +125,38 @@ $client = new Client(requestOptions: ['maxRetries' => 0]);
 
 // Or, configure per-request:
 $result = $client->characters->list(requestOptions: ['maxRetries' => 5]);
+```
+
+### File uploads
+
+Request parameters that correspond to file uploads can be passed as a resource returned by `fopen()`, a string of file contents, or a `FileParam` instance.
+
+```php
+<?php
+
+use Believe\Core\FileParam;
+
+// Pass a string with filename and content type:
+$contents = file_get_contents('/path/to/file');
+// Pass a string with filename and content type:
+$fileUpload = $client->teams->logo->upload(
+  'team_id',
+  file: FileParam::fromString($contents, filename: '/path/to/file', contentType: '…'),
+);
+
+// Pass in only a string (where applicable)
+$fileUpload = $client->teams->logo->upload('team_id', file: '…');
+
+// Pass an open resource:
+$fd = fopen('/path/to/file', 'r');
+try {
+  $fileUpload = $client->teams->logo->upload(
+    'team_id',
+    file: FileParam::fromResource($fd, filename: '/path/to/file', contentType: '…'),
+  );
+} finally {
+  fclose($fd);
+}
 ```
 
 ## Advanced concepts

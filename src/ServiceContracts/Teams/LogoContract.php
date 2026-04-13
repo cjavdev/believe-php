@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Believe\ServiceContracts\Teams;
 
 use Believe\Core\Exceptions\APIException;
+use Believe\Core\FileParam;
 use Believe\RequestOptions;
 use Believe\Teams\Logo\FileUpload;
 
@@ -42,14 +43,14 @@ interface LogoContract
     /**
      * @api
      *
-     * @param string $file Logo image file
+     * @param string|FileParam $file Logo image file
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function upload(
         string $teamID,
-        string $file,
+        string|FileParam $file,
         RequestOptions|array|null $requestOptions = null,
     ): FileUpload;
 }

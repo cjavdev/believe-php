@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.6.0 (2026-04-13)
+
+Full Changelog: [v0.5.0...v0.6.0](https://github.com/cjavdev/believe-php/compare/v0.5.0...v0.6.0)
+
+### Features
+
+* **api:** release PRs ([0f5f506](https://github.com/cjavdev/believe-php/commit/0f5f506221673de28ba4ba42ccff60208b12159f))
+
+
+### Bug Fixes
+
+* **client:** properly generate file params ([82a1f27](https://github.com/cjavdev/believe-php/commit/82a1f27f746656c2eb0615f55bcc66b46cf8bc8a))
+
 ## 0.5.0 (2026-04-03)
 
 Full Changelog: [v0.4.0...v0.5.0](https://github.com/cjavdev/believe-php/compare/v0.4.0...v0.5.0)

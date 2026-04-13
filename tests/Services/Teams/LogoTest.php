@@ -3,6 +3,7 @@
 namespace Tests\Services\Teams;
 
 use Believe\Client;
+use Believe\Core\FileParam;
 use Believe\Core\Util;
 use Believe\Teams\Logo\FileUpload;
 use PHPUnit\Framework\Attributes\CoversNothing;
@@ -99,7 +100,10 @@ final class LogoTest extends TestCase
             $this->markTestSkipped('Mock server tests are disabled');
         }
 
-        $result = $this->client->teams->logo->upload('team_id', file: 'file');
+        $result = $this->client->teams->logo->upload(
+            'team_id',
+            file: FileParam::fromString('Example data', filename: uniqid('file-upload-', true)),
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(FileUpload::class, $result);
@@ -112,7 +116,10 @@ final class LogoTest extends TestCase
             $this->markTestSkipped('Mock server tests are disabled');
         }
 
-        $result = $this->client->teams->logo->upload('team_id', file: 'file');
+        $result = $this->client->teams->logo->upload(
+            'team_id',
+            file: FileParam::fromString('Example data', filename: uniqid('file-upload-', true)),
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(FileUpload::class, $result);
