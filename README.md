@@ -8,22 +8,10 @@ It is generated with [Stainless](https://www.stainless.com/).
 
 ## Installation
 
-To use this package, install via Composer by adding the following to your application's `composer.json`:
-
 <!-- x-release-please-start-version -->
 
-```json
-{
-  "repositories": [
-    {
-      "type": "vcs",
-      "url": "git@github.com:cjavdev/believe-php.git"
-    }
-  ],
-  "require": {
-    "org-placeholder/believe": "dev-main"
-  }
-}
+```
+composer require "org-placeholder/believe 0.5.0"
 ```
 
 <!-- x-release-please-end -->
