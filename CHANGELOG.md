@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.6.1 (2026-04-18)
+
+Full Changelog: [v0.6.0...v0.6.1](https://github.com/cjavdev/believe-php/compare/v0.6.0...v0.6.1)
+
+### Bug Fixes
+
+* **client:** resolve serialization issue with unions and enums ([ef0a24c](https://github.com/cjavdev/believe-php/commit/ef0a24c40fd6971d7d015445203c937d2f8f7094))
+* populate enum-typed properties with enum instances ([5ec8c70](https://github.com/cjavdev/believe-php/commit/5ec8c7066576e290b5ed48bd1cc9f664d1e8e794))
+
 ## 0.6.0 (2026-04-13)
 
 Full Changelog: [v0.5.0...v0.6.0](https://github.com/cjavdev/believe-php/compare/v0.5.0...v0.6.0)
