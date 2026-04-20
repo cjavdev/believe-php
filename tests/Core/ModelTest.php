@@ -1,0 +1,206 @@
+<?php
+
+namespace Tests\Core;
+
+use Believe\Core\Attributes\Optional;
+use Believe\Core\Attributes\Required;
+use Believe\Core\Concerns\SdkModel;
+use Believe\Core\Contracts\BaseModel;
+use PHPUnit\Framework\Attributes\CoversNothing;
+use PHPUnit\Framework\Attributes\Test;
+use PHPUnit\Framework\TestCase;
+
+class Dog implements BaseModel
+{
+    /** @use SdkModel<array<string, mixed>> */
+    use SdkModel;
+
+    #[Required]
+    public string $name;
+
+    #[Required('age_years')]
+    public int $ageYears;
+
+    /** @var list<string>|null */
+    #[Optional]
+    public ?array $friends;
+
+    #[Required]
+    public ?string $owner;
+
+    /**
+     * @param list<string>|null $friends
+     */
+    public function __construct(
+        string $name,
+        int $ageYears,
+        ?string $owner,
+        ?array $friends = null,
+    ) {
+        $this->initialize();
+
+        $this->name = $name;
+        $this->ageYears = $ageYears;
+        $this->owner = $owner;
+
+        null !== $friends && $this['friends'] = $friends;
+    }
+}
+
+enum TicketPriority: string
+{
+    case Low = 'low';
+    case High = 'high';
+}
+
+class Ticket implements BaseModel
+{
+    /** @use SdkModel<array<string, mixed>> */
+    use SdkModel;
+
+    #[Required(enum: TicketPriority::class)]
+    public TicketPriority $priority;
+
+    /** @var list<TicketPriority> */
+    #[Required(list: TicketPriority::class)]
+    public array $labels;
+
+    public function __construct()
+    {
+        $this->initialize();
+    }
+}
+
+/**
+ * @internal
+ *
+ * @coversNothing
+ */
+#[CoversNothing]
+class ModelTest extends TestCase
+{
+    #[Test]
+    public function testBasicGetAndSet(): void
+    {
+        $model = new Dog(name: 'Bob', ageYears: 12, owner: null);
+        $this->assertEquals(12, $model->ageYears);
+
+        ++$model->ageYears;
+        $this->assertEquals(13, $model->ageYears);
+    }
+
+    #[Test]
+    public function testNullAccess(): void
+    {
+        $model = new Dog(name: 'Bob', ageYears: 12, owner: null);
+        $this->assertNull($model->owner);
+        $this->assertNull($model->friends);
+    }
+
+    #[Test]
+    public function testArrayGetAndSet(): void
+    {
+        $model = new Dog(name: 'Bob', ageYears: 12, owner: null);
+        $model->friends ??= [];
+        $this->assertEquals([], $model->friends);
+        $model->friends[] = 'Alice';
+        $this->assertEquals(['Alice'], $model->friends);
+    }
+
+    #[Test]
+    public function testDiscernsBetweenNullAndUnset(): void
+    {
+        $modelUnsetFriends = new Dog(name: 'Bob', ageYears: 12, owner: null);
+        $modelNullFriends = new Dog(name: 'bob', ageYears: 12, owner: null);
+        $modelNullFriends->friends = null;
+
+        $this->assertEquals(12, $modelUnsetFriends->ageYears);
+        $this->assertEquals(12, $modelNullFriends->ageYears);
+
+        $this->assertTrue($modelUnsetFriends->offsetExists('ageYears'));
+        $this->assertTrue($modelNullFriends->offsetExists('ageYears'));
+
+        $this->assertNull($modelUnsetFriends->friends);
+        $this->assertNull($modelNullFriends->friends);
+
+        $this->assertFalse($modelUnsetFriends->offsetExists('friends'));
+        $this->assertTrue($modelNullFriends->offsetExists('friends'));
+    }
+
+    #[Test]
+    public function testIssetOnOmittedProperties(): void
+    {
+        $model = new Dog(name: 'Bob', ageYears: 12, owner: null);
+        $this->assertFalse(isset($model->owner));
+        $this->assertFalse(isset($model->friends));
+    }
+
+    #[Test]
+    public function testSerializeBasicModel(): void
+    {
+        $model = new Dog(name: 'Bob', ageYears: 12, owner: 'Eve', friends: ['Alice', 'Charlie']);
+        $this->assertEquals(
+            '{"name":"Bob","age_years":12,"friends":["Alice","Charlie"],"owner":"Eve"}',
+            json_encode($model)
+        );
+    }
+
+    #[Test]
+    public function testSerializeModelWithOmittedProperties(): void
+    {
+        $model = new Dog(name: 'Bob', ageYears: 12, owner: null);
+        $this->assertEquals(
+            '{"name":"Bob","age_years":12,"owner":null}',
+            json_encode($model)
+        );
+    }
+
+    #[Test]
+    public function testSerializeModelWithExplicitNull(): void
+    {
+        $model = new Dog(name: 'Bob', ageYears: 12, owner: null);
+        $model->friends = null;
+        $this->assertEquals(
+            '{"name":"Bob","age_years":12,"friends":null,"owner":null}',
+            json_encode($model)
+        );
+    }
+
+    #[Test]
+    public function testScalarEnumCoercesToInstance(): void
+    {
+        $model = Ticket::fromArray(['priority' => 'low', 'labels' => []]);
+        $this->assertSame(TicketPriority::Low, $model->priority);
+    }
+
+    #[Test]
+    public function testListOfEnumCoercesElementsToInstances(): void
+    {
+        $model = Ticket::fromArray(['priority' => 'low', 'labels' => ['low', 'high']]);
+        $this->assertCount(2, $model->labels);
+        $this->assertSame(TicketPriority::Low, $model->labels[0]);
+        $this->assertSame(TicketPriority::High, $model->labels[1]);
+    }
+
+    #[Test]
+    public function testEnumInstancePassesThrough(): void
+    {
+        $model = Ticket::fromArray(['priority' => TicketPriority::High, 'labels' => []]);
+        $this->assertSame(TicketPriority::High, $model->priority);
+    }
+
+    #[Test]
+    public function testInvalidEnumScalarFallsBackToData(): void
+    {
+        $model = Ticket::fromArray(['priority' => 'urgent', 'labels' => []]);
+        $this->assertSame('urgent', $model['priority']);
+    }
+
+    #[Test]
+    public function testEnumWireFormatStableAcrossConstruction(): void
+    {
+        $fromScalar = Ticket::fromArray(['priority' => 'low', 'labels' => ['high']]);
+        $fromInstance = Ticket::fromArray(['priority' => TicketPriority::Low, 'labels' => [TicketPriority::High]]);
+        $this->assertSame(json_encode($fromScalar), json_encode($fromInstance));
+    }
+}
