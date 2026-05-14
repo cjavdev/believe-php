@@ -6,6 +6,7 @@ namespace Believe;
 
 use Believe\Core\BaseClient;
 use Believe\Core\Exceptions\APIException;
+use Believe\Core\Implementation\StreamingHttpClient;
 use Believe\Core\Util;
 use Believe\Services\BelieveClientRawService;
 use Believe\Services\BelieveClientService;
@@ -165,6 +166,11 @@ class Client extends BaseClient
             ),
             $requestOptions,
         );
+
+        if (is_null($options->streamingTransporter)) {
+            assert(!is_null($options->transporter));
+            $options->streamingTransporter = new StreamingHttpClient($options->transporter);
+        }
 
         /** @var array<string, string|null> $headers */
         $headers = [
