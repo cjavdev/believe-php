@@ -25,6 +25,7 @@ use Believe\Core\Contracts\BaseModel;
  *   isFunny?: bool|null,
  *   isInspirational?: bool|null,
  *   popularityScore?: float|null,
+ *   season?: int|null,
  *   secondaryThemes?: list<QuoteTheme|value-of<QuoteTheme>>|null,
  *   timesShared?: int|null,
  * }
@@ -94,6 +95,12 @@ final class QuoteCreateParams implements BaseModel
     public ?float $popularityScore;
 
     /**
+     * Season number (1-3) when the quote occurred.
+     */
+    #[Optional(nullable: true)]
+    public ?int $season;
+
+    /**
      * Additional themes.
      *
      * @var list<value-of<QuoteTheme>>|null $secondaryThemes
@@ -152,6 +159,7 @@ final class QuoteCreateParams implements BaseModel
         ?bool $isFunny = null,
         ?bool $isInspirational = null,
         ?float $popularityScore = null,
+        ?int $season = null,
         ?array $secondaryThemes = null,
         ?int $timesShared = null,
     ): self {
@@ -167,6 +175,7 @@ final class QuoteCreateParams implements BaseModel
         null !== $isFunny && $self['isFunny'] = $isFunny;
         null !== $isInspirational && $self['isInspirational'] = $isInspirational;
         null !== $popularityScore && $self['popularityScore'] = $popularityScore;
+        null !== $season && $self['season'] = $season;
         null !== $secondaryThemes && $self['secondaryThemes'] = $secondaryThemes;
         null !== $timesShared && $self['timesShared'] = $timesShared;
 
@@ -272,6 +281,17 @@ final class QuoteCreateParams implements BaseModel
     {
         $self = clone $this;
         $self['popularityScore'] = $popularityScore;
+
+        return $self;
+    }
+
+    /**
+     * Season number (1-3) when the quote occurred.
+     */
+    public function withSeason(?int $season): self
+    {
+        $self = clone $this;
+        $self['season'] = $season;
 
         return $self;
     }

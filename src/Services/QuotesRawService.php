@@ -49,6 +49,7 @@ final class QuotesRawService implements QuotesRawContract
      *   isFunny?: bool,
      *   isInspirational?: bool,
      *   popularityScore?: float|null,
+     *   season?: int|null,
      *   secondaryThemes?: list<QuoteTheme|value-of<QuoteTheme>>,
      *   timesShared?: int|null,
      * }|QuoteCreateParams $params
@@ -114,6 +115,7 @@ final class QuotesRawService implements QuotesRawContract
      *   isInspirational?: bool|null,
      *   momentType?: value-of<QuoteMoment>,
      *   popularityScore?: float|null,
+     *   season?: int|null,
      *   secondaryThemes?: list<QuoteTheme|value-of<QuoteTheme>>|null,
      *   text?: string|null,
      *   theme?: value-of<QuoteTheme>,

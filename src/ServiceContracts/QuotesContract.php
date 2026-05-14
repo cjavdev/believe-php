@@ -28,6 +28,7 @@ interface QuotesContract
      * @param bool $isFunny Whether this quote is humorous
      * @param bool $isInspirational Whether this quote is inspirational
      * @param float|null $popularityScore Popularity/virality score (0-100)
+     * @param int|null $season Season number (1-3) when the quote occurred
      * @param list<QuoteTheme|value-of<QuoteTheme>> $secondaryThemes Additional themes
      * @param int|null $timesShared Number of times shared on social media
      * @param RequestOpts|null $requestOptions
@@ -44,6 +45,7 @@ interface QuotesContract
         bool $isFunny = false,
         bool $isInspirational = true,
         ?float $popularityScore = null,
+        ?int $season = null,
         ?array $secondaryThemes = null,
         ?int $timesShared = null,
         RequestOptions|array|null $requestOptions = null,
@@ -80,6 +82,7 @@ interface QuotesContract
         ?bool $isInspirational = null,
         QuoteMoment|string|null $momentType = null,
         ?float $popularityScore = null,
+        ?int $season = null,
         ?array $secondaryThemes = null,
         ?string $text = null,
         QuoteTheme|string|null $theme = null,
