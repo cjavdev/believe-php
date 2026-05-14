@@ -11,7 +11,7 @@ It is generated with [Stainless](https://www.stainless.com/).
 <!-- x-release-please-start-version -->
 
 ```
-composer require "placeholder/placeholder 0.6.0"
+composer require "placeholder/placeholder 0.6.1"
 ```
 
 <!-- x-release-please-end -->
