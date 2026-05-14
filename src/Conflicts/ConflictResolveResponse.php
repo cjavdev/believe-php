@@ -38,13 +38,13 @@ final class ConflictResolveResponse implements BaseModel
     public string $diagnosis;
 
     /**
-     * Advice from the Diamond Dogs support group.
+     * Advice from the Diamond Dogs support groups.
      */
     #[Required('diamond_dogs_advice')]
     public string $diamondDogsAdvice;
 
     /**
-     * What resolution could look like.
+     * What resolution could look like if successful.
      */
     #[Required('potential_outcome')]
     public string $potentialOutcome;
@@ -145,7 +145,7 @@ final class ConflictResolveResponse implements BaseModel
     }
 
     /**
-     * Advice from the Diamond Dogs support group.
+     * Advice from the Diamond Dogs support groups.
      */
     public function withDiamondDogsAdvice(string $diamondDogsAdvice): self
     {
@@ -156,7 +156,7 @@ final class ConflictResolveResponse implements BaseModel
     }
 
     /**
-     * What resolution could look like.
+     * What resolution could look like if successful.
      */
     public function withPotentialOutcome(string $potentialOutcome): self
     {

@@ -44,7 +44,7 @@ final class PlayerBase implements BaseModel
     public int $jerseyNumber;
 
     /**
-     * Playing position on the field.
+     * Players position on the field.
      *
      * @var value-of<Position> $position
      */
@@ -177,7 +177,7 @@ final class PlayerBase implements BaseModel
     }
 
     /**
-     * Playing position on the field.
+     * Players position on the field.
      *
      * @param Position|value-of<Position> $position
      */

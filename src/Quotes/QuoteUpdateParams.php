@@ -22,6 +22,7 @@ use Believe\Core\Contracts\BaseModel;
  *   isInspirational?: bool|null,
  *   momentType?: null|QuoteMoment|value-of<QuoteMoment>,
  *   popularityScore?: float|null,
+ *   season?: int|null,
  *   secondaryThemes?: list<QuoteTheme|value-of<QuoteTheme>>|null,
  *   text?: string|null,
  *   theme?: null|QuoteTheme|value-of<QuoteTheme>,
@@ -59,6 +60,9 @@ final class QuoteUpdateParams implements BaseModel
 
     #[Optional('popularity_score', nullable: true)]
     public ?float $popularityScore;
+
+    #[Optional(nullable: true)]
+    public ?int $season;
 
     /** @var list<value-of<QuoteTheme>>|null $secondaryThemes */
     #[Optional('secondary_themes', list: QuoteTheme::class, nullable: true)]
@@ -100,6 +104,7 @@ final class QuoteUpdateParams implements BaseModel
         ?bool $isInspirational = null,
         QuoteMoment|string|null $momentType = null,
         ?float $popularityScore = null,
+        ?int $season = null,
         ?array $secondaryThemes = null,
         ?string $text = null,
         QuoteTheme|string|null $theme = null,
@@ -114,6 +119,7 @@ final class QuoteUpdateParams implements BaseModel
         null !== $isInspirational && $self['isInspirational'] = $isInspirational;
         null !== $momentType && $self['momentType'] = $momentType;
         null !== $popularityScore && $self['popularityScore'] = $popularityScore;
+        null !== $season && $self['season'] = $season;
         null !== $secondaryThemes && $self['secondaryThemes'] = $secondaryThemes;
         null !== $text && $self['text'] = $text;
         null !== $theme && $self['theme'] = $theme;
@@ -179,6 +185,14 @@ final class QuoteUpdateParams implements BaseModel
     {
         $self = clone $this;
         $self['popularityScore'] = $popularityScore;
+
+        return $self;
+    }
+
+    public function withSeason(?int $season): self
+    {
+        $self = clone $this;
+        $self['season'] = $season;
 
         return $self;
     }
