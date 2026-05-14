@@ -67,6 +67,7 @@ final class QuotesTest extends TestCase
             isFunny: false,
             isInspirational: true,
             popularityScore: 98.5,
+            season: 1,
             secondaryThemes: [QuoteTheme::LEADERSHIP, QuoteTheme::TEAMWORK],
             timesShared: 250000,
         );
